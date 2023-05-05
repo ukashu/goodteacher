@@ -10,7 +10,7 @@ interface AuthContextProps {
 }
 
 const TOKEN_KEY = 'goodteacher-token'
-export const API_URL = ''
+export const API_URL = 'http://192.168.0.135:5000/api'
 const AuthContext = createContext<AuthContextProps>({})
 
 export const useAuth = () => {

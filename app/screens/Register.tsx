@@ -1,25 +1,15 @@
 import { View, StyleSheet, TextInput, Button } from 'react-native';
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../App';
 
-type LoginScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'Login'
->;
-
-type Props = {
-  navigation: LoginScreenNavigationProp;
-};
-
-export default function Login({ navigation }: Props) {
+export default function Register() {
+  const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const { onLogin } = useAuth()
+  const { onRegister } = useAuth()
 
-  const login = async () => {
-    const result = await onLogin!(email, password)
+  const register = async () => {
+    const result = await onRegister!(name, email, password)
     if (result && result.error) {
       alert(result.msg)
     }
@@ -27,9 +17,10 @@ export default function Login({ navigation }: Props) {
 
   return (
     <View>
+      <TextInput placeholder="Name" onChangeText={(text: string) => setName(text)} value={name}/>
       <TextInput placeholder="Email" onChangeText={(text: string) => setEmail(text)} value={email}/>
       <TextInput placeholder="Password" secureTextEntry={true} onChangeText={(password: string) => setPassword(password)} value={password}/>
-      <Button onPress={login} title="Sign In"/>
+      <Button onPress={register} title="Register"/>
     </View>
   )
 }
