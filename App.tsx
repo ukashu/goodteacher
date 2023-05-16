@@ -29,7 +29,10 @@ export const Layout = () => {
 
   return (
   <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}>
       {authState?.authenticated ? (
         <Stack.Screen 
           name="Home" 
