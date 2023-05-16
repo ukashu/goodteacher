@@ -7,7 +7,7 @@ export default function CustomInput(props: TextInputProps) {
 
   return (
     <View style={tw`border-b border-gray-500 my-0 px-8 w-100% items-center`}>
-      <TextInput {...rest}/>
+      <TextInput style={tw`text-center`} {...rest}/>
     </View>
   )
 }

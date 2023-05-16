@@ -4,7 +4,7 @@ import * as SecureStore from 'expo-secure-store'
 
 interface AuthContextProps {
   authState?: { token: string | null, authenticated: boolean | null }
-  onRegister?: (name: string, email: string, password: string) => Promise<any>;
+  onRegister?: (name: string, email: string, password: string, passwordConfirmation: string, type: string) => Promise<any>;
   onLogin?: (email: string, password: string) => Promise<any>;
   onLogout?: () => Promise<any>;
 }
@@ -42,11 +42,15 @@ export const AuthProvider = ({ children }: any) => {
     loadToken()
   }, [])
 
-  const register = async (name: string, email: string, password: string) => {
+  const register = async (name: string, email: string, password: string, passwordConfirmation: string, type: string) => {
     try {
-      return await axios.post(`${API_URL}/users`, { name, email, password })
-    } catch(err) {
-      return { error: true, msg: (err as any) }
+      return await axios.post(`${API_URL}/users`, { name, email, password, passwordConfirmation, type })
+    } catch(err: any) {
+      if (err.response.data.message) {
+        return { error: true, msg: err.response.data.message }
+      } else {
+        return { error: true, msg: err}
+      }
     }
   }
 
@@ -65,9 +69,12 @@ export const AuthProvider = ({ children }: any) => {
 
       return result;
 
-    } catch(err) {
-      console.log(err)
-      return { error: true, msg: (err as any) }
+    } catch(err: any) {
+      if (err.response.data.message) {
+        return { error: true, msg: err.response.data.message }
+      } else {
+        return { error: true, msg: err}
+      }
     }
   }
 
