@@ -2,8 +2,11 @@ import { View, Text, TouchableOpacity, TouchableOpacityProps } from 'react-nativ
 import React from 'react';
 import tw from 'twrnc';
 
-export default function CustomButton(props: TouchableOpacityProps) {
+
+export default function CustomButton(props: TouchableOpacityProps & { title: string }) {
   return (
-    <TouchableOpacity style={tw`px-4 py-2 rounded-lg bg-blue-500`} {...props}></TouchableOpacity>
+    <TouchableOpacity {...props}>
+      <Text style={tw`text-white text-center`}>{props.title}</Text>
+    </TouchableOpacity>
   )
 }
