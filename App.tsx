@@ -1,6 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { AuthProvider, useAuth } from './app/context/AuthContext';
 import Login from './app/screens/Login';
 import Register from './app/screens/Register';

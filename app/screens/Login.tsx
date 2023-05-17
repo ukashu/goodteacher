@@ -47,12 +47,12 @@ export default function Login({ navigation }: Props) {
             <CustomInput placeholder="password" secureTextEntry={true} onChangeText={(password: string) => setPassword(password)} value={password} autoCapitalize='none'/>
             <View style={tw`w-100% flex-row justify-between`}>
               <Text></Text>
-              <TouchableOpacity style={tw`px-4 py-2 rounded-lg bg-blue-500`} onPress={login}><Text style={tw`text-white`}>Sign in</Text></TouchableOpacity>
+              <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500`} onPress={login}><Text style={tw`text-white text-center`}>Sign in</Text></TouchableOpacity>
             </View>
           </View>
           <View style={tw`w-100% flex-row justify-between items-center`}>
               <Text style={tw`text-white`} >{"Don't have an account? "}</Text>
-              <TouchableOpacity style={tw`px-4 py-2 rounded-lg bg-blue-500 self-end`} onPress={() => navigation.navigate('Register')}><Text style={tw`text-white`}>Sign up</Text></TouchableOpacity>
+              <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500 self-end`} onPress={() => navigation.navigate('Register')}><Text style={tw`text-white text-center`}>Sign up</Text></TouchableOpacity>
             </View>
         </View>
       </View>

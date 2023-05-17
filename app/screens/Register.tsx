@@ -60,14 +60,14 @@ export default function Register({ navigation }: Props) {
             <View style={tw`w-100% flex-row justify-between items-center`}>
               <View style={tw`flex-row justify-between items-center`}>
                 <Checkbox state={isTeacher} onPress={() => setIsTeacher(prevState=>!prevState)}/>
-                <Text style={tw`text-white text-xs ml-3`} >{"Check to create a teacher account"}</Text>
+                <Text style={tw`text-white text-xs ml-3`} >{"Click to create a teacher account"}</Text>
               </View>
-              <TouchableOpacity style={tw`px-4 py-2 rounded-lg bg-blue-500`} onPress={register}><Text style={tw`text-white`}>Register</Text></TouchableOpacity>
+              <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500`} onPress={register}><Text style={tw`text-white text-center`}>Register</Text></TouchableOpacity>
             </View>
           </View>
           <View style={tw`w-100% flex-row justify-between items-center`}>
             <Text style={tw`text-white`} >{"Have an account already? "}</Text>
-            <TouchableOpacity style={tw`px-4 py-2 rounded-lg bg-blue-500 self-end`} onPress={() => navigation.navigate('Login')}><Text style={tw`text-white`}>Sign in</Text></TouchableOpacity>
+            <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500 self-end`} onPress={() => navigation.navigate('Login')}><Text style={tw`text-white text-center`}>Sign in</Text></TouchableOpacity>
           </View>
         </View>
       </View>
