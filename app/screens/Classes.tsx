@@ -4,22 +4,23 @@ import { useAuth } from '../context/AuthContext';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
 
-type LogoutNavigationProp = NativeStackNavigationProp<
+type ClassesNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  'Login'
+  'Classes'
 >;
 
 type Props = {
-  navigation: LogoutNavigationProp;
+  navigation: ClassesNavigationProp;
 };
 
-export default function Home({ navigation }: Props) {
+export default function Classes({ navigation }: Props) {
   const { authState, onLogout } = useAuth()
 
   return (
     <View>
-      <Text>Home</Text>
+      <Text>Classes</Text>
       <Button onPress={onLogout} title="Sign Out"/>
+      <Button onPress={() => navigation.navigate('Students')} title="Go to students"/>
     </View>
   )
 }

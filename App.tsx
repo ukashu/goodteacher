@@ -1,16 +1,20 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { AuthProvider, useAuth } from './app/context/AuthContext';
-import Home from './app/screens/Home';
 import Login from './app/screens/Login';
 import Register from './app/screens/Register';
+import Classes from './app/screens/Classes';
+import Students from './app/screens/Students';
+import Tasks from './app/screens/Tasks'
 
 export type RootStackParamList = {
   Home: undefined,
   Login: undefined,
-  Register: undefined
+  Register: undefined,
+  Classes: undefined,
+  Students: undefined,
+  Tasks: undefined
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -34,28 +38,29 @@ export const Layout = () => {
         headerShown: false
       }}>
       {authState?.authenticated ? (
-        <Stack.Screen 
-          name="Home" 
-          component={Home}
-          options={{
-            headerRight: () => <Button onPress={onLogout} title="Sign Out"/>
-          }}></Stack.Screen>
+        <>
+          <Stack.Screen 
+            name="Classes" 
+            component={Classes}
+          ></Stack.Screen>
+          <Stack.Screen 
+            name="Students" 
+            component={Students}
+          ></Stack.Screen>
+          <Stack.Screen 
+            name="Tasks" 
+            component={Tasks}
+          ></Stack.Screen>
+        </>
         ) : (
           <>
             <Stack.Screen 
             name="Login" 
             component={Login}
-            options={({navigation}) => ({
-              headerRight: () => <Button onPress={() => navigation.navigate('Register')} title="Register"/>
-            })}
             ></Stack.Screen>
             <Stack.Screen 
             name="Register" 
             component={Register}
-            options={({navigation}) => ({
-              headerBackVisible: false,
-              headerRight: () => <Button onPress={() => navigation.navigate('Login')} title="Sign In"/>
-            })}
             ></Stack.Screen>
           </>
       )
