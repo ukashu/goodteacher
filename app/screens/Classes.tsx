@@ -39,10 +39,10 @@ export default function Classes({ navigation }: Props) {
             <BackButton onPress={() => navigation.dispatch(StackActions.pop(1))}/>
             <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-blue-500`}/>
           </View>
-          <Text style={tw` text-4xl text-blue-600`}>Your classes</Text> 
+          <Text style={tw` text-4xl text-blue-600`}>Your classes</Text>
           <View style={tw` w-100% `}>
-            <Class/>
-            <Class/>
+            <Class className='Akordeon 1 rok' memberCount={3}/>
+            <Class className='Akordeon 3 rok' memberCount={7}/>
           </View>
           <View style={tw` bg-red-800 mt-auto`}>
             <Button onPress={() => navigation.navigate('Students')} title="Go to students"/>
