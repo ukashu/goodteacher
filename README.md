@@ -2,7 +2,14 @@ TODOS:
   - add frontend error handling
   - loading functionality
   - fonts
-  - fetch classes 
-  - add new class
+  - fetch classes functionality
+  - Store user id in secure storage + global auth context for future requests
+  - Store account type in secure storage + global auth context
+  - I should figure out what to do on error in axios request, what to render - right now isLoading gets changed to false so it loads the classes page (and retries the request apparently)
+  - design loading screen
+  - refresh on pull down
+  - add new class functionality
   - default avatar
+  - change password fields to invisible
+  - caching in react native
   - random avatar generation + storage (generate random injection varaibles to preset svgs and save only the generated values)
