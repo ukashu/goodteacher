@@ -44,7 +44,7 @@ export default function Login({ navigation }: Props) {
         <View style={tw`w-100% h-50% items-center justify-around px-10`}>
           <View style={tw`w-100% h-75% justify-around items-center`}>
             <CustomInput placeholder="email" onChangeText={(text: string) => setEmail(text)} value={email} autoCapitalize='none'/>
-            <CustomInput placeholder="password" secureTextEntry={true} onChangeText={(password: string) => setPassword(password)} value={password} autoCapitalize='none'/>
+            <CustomInput placeholder="password" secureTextEntry={false} onChangeText={(password: string) => setPassword(password)} value={password} autoCapitalize='none'/>
             <View style={tw`w-100% flex-row justify-between`}>
               <Text></Text>
               <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500`} onPress={login}><Text style={tw`text-white text-center`}>Sign in</Text></TouchableOpacity>

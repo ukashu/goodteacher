@@ -2,12 +2,12 @@ TODOS:
   - add frontend error handling
   - loading functionality
   - fonts
-  - fetch classes functionality
-  - Store user id in secure storage + global auth context for future requests
-  - Store account type in secure storage + global auth context
+  - fetch classes functionality DONE
+  - Store user id in secure storage + global auth context for future requests DONE
+  - Store account type in secure storage + global auth context DONE
   - I should figure out what to do on error in axios request, what to render - right now isLoading gets changed to false so it loads the classes page (and retries the request apparently)
   - design loading screen
-  - refresh on pull down
+  - refresh on pull down 
   - add new class functionality
   - default avatar
   - change password fields to invisible

@@ -8,7 +8,8 @@ import tw from 'twrnc';
 type ClassProps = {
   onPress?: TouchableOpacityProps['onPress'],
   className: string,
-  memberCount: number,
+  memberCount?: number,
+  joinedStatus?: string,
   classId?: number,
 }
 
@@ -20,7 +21,9 @@ export default function Class(props : ClassProps) {
           {/* all items inside of here */}
           <View style={tw``}>
             <Text style={tw`text-xl text-white`}>{props.className}</Text>
-            <Text style={tw` text-base text-white`}>{`members: ${props.memberCount}`}</Text>
+            {props.memberCount
+            ? <Text style={tw` text-base text-white`}>{`members: ${props.memberCount}`}</Text>
+            : <Text style={tw` text-base text-white`}>{`joined status: ${props.joinedStatus}`}</Text>}
           </View>
           <View style={tw`bg-white rounded-md h-100% aspect-square`}>
             <ClassAvatar/>
