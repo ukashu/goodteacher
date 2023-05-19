@@ -1,4 +1,4 @@
-import { View, Text, Button, ScrollView, RefreshControl } from 'react-native';
+import { View, Text, Button, ScrollView, RefreshControl, Alert } from 'react-native';
 import { Dimensions } from 'react-native';
 import React from 'react';
 import tw from 'twrnc';
@@ -11,6 +11,7 @@ import CustomButton from '../components/CustomButton';
 import BackButton from '../components/BackButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import StudentClass from '../components/StudentClass';
+import TeacherClass from '../components/TeacherClass';
 import { API_URL } from '../context/AuthContext';
 import axios from 'axios'
 import Loading from './Loading';
@@ -78,7 +79,7 @@ export default function Classes({ navigation }: Props) {
     setClasses((prevState) => {
       return {
         ...prevState,
-        classes: prevState.classes.filter((item) => item.class_id !== classId)
+        classes: prevState.classes.filter((item) => item.class_id !== classId && item.id !== classId)
       }
     })
   }
@@ -141,7 +142,13 @@ export default function Classes({ navigation }: Props) {
             </View>
             <Text style={tw` text-4xl text-blue-600`}>Your classes</Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} />}>
-              {classes.classes.map((classObj: any) => { return <StudentClass removeSelf={removeClassFromState} joinSelf={changeJoinedStatus} key={classObj.class_id} className={classObj.class_id} classId={classObj.class_id} studentId={Number(authState?.userId)} joinedStatus={classObj.joined}/>})}
+              {classes.classes.map((classObj: any) => { 
+                if (authState?.accountType === 'TEACHER') {
+                  return <TeacherClass removeSelf={removeClassFromState} key={classObj.id} className={classObj.name} classId={classObj.id}/>
+                } else {
+                  return <StudentClass removeSelf={removeClassFromState} joinSelf={changeJoinedStatus} key={classObj.class_id} className={classObj.class_id} classId={classObj.class_id} studentId={Number(authState?.userId)} joinedStatus={classObj.joined}/>
+                }
+              })}
             </ScrollView>
             <View style={tw` bg-red-800 mt-auto`}>
               <Button onPress={() => navigation.navigate('Students')} title="Go to students"/>

@@ -32,8 +32,6 @@ export default function StudentClass(props : StudentClassProps) {
     message: null,
   })
 
-  const [isJoined, setIsJoined] = React.useState<boolean>(props.joinedStatus)
-
   function goToTasks() {
     console.log('go to tasks')
   }
