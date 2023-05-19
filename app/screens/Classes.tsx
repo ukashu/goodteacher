@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, ScrollView, RefreshControl } from 'react-native';
 import { Dimensions } from 'react-native';
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
@@ -29,6 +29,7 @@ type ClassesState = {
   isError: boolean,
   isSuccess: boolean,
   isLoading: boolean,
+  isRefreshing: boolean,
   message: string | null,
 }
 
@@ -40,15 +41,11 @@ export default function Classes({ navigation }: Props) {
     isError: false,
     isSuccess: false,
     isLoading: true,
+    isRefreshing: false,
     message: null,
   })
 
   const getClasses = async () => {
-    // try await axios
-    // if success setClasses {issuccess true, isloading false, message}
-    // if error 401 onLogout
-    // if error setClasses {iserror true, isloading false, message}
-    // find a place to reset classes object (do I need to? i don't think so)
 
     try {
       const res = await axios.get(`${API_URL}/classes`)
@@ -57,6 +54,7 @@ export default function Classes({ navigation }: Props) {
           ...prevState,
           classes: res.data.myClasses,
           isLoading: false,
+          isRefreshing: false,
           isSuccess: true,
           message: 'Success',
         }
@@ -68,6 +66,7 @@ export default function Classes({ navigation }: Props) {
           ...prevState,
           isError: true,
           isLoading: false,
+          isRefreshing: false,
           isSuccess: false, //not sure if this is needed
           message: 'Generic error',
         }
@@ -84,6 +83,17 @@ export default function Classes({ navigation }: Props) {
   //if isloading return loading component
   //if iserror alert error and reset classes object to default
   //add refresh on pull down (just reset classes object to default and call getclasses again)
+
+  //refreshing functionality
+  const onRefresh = React.useCallback(() => {
+    setClasses((prevState) => {
+      return {
+        ...prevState,
+        isRefreshing: true,
+      }
+    })
+    getClasses()
+  }, []);
 
   return (
     <>
@@ -103,9 +113,9 @@ export default function Classes({ navigation }: Props) {
               <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-blue-500`}/>
             </View>
             <Text style={tw` text-4xl text-blue-600`}>Your classes</Text>
-            <View style={tw` w-100% `}>
+            <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} />}>
               {classes.classes.map((classObj: any) => { return <Class key={classObj.class_id} className={classObj.class_id} joinedStatus={classObj.joined}/>})}
-            </View>
+            </ScrollView>
             <View style={tw` bg-red-800 mt-auto`}>
               <Button onPress={getClasses} title="Fetch classes test"/>
               <Button onPress={() => navigation.navigate('Students')} title="Go to students"/>

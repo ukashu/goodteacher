@@ -7,7 +7,8 @@ TODOS:
   - Store account type in secure storage + global auth context DONE
   - I should figure out what to do on error in axios request, what to render - right now isLoading gets changed to false so it loads the classes page (and retries the request apparently)
   - design loading screen
-  - refresh on pull down 
+  - Classes scrolling DONE
+  - refresh on pull down DONE
   - add new class functionality
   - default avatar
   - change password fields to invisible
