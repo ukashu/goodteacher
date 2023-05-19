@@ -15,6 +15,10 @@ function goToStudents() {
   console.log('go to students')
 }
 
+function deleteClass() {
+  console.log('delete class')
+}
+
 export default function StudentClass(props : StudentClassProps) {
   return (
     <View style={tw`px-3`}>

@@ -60,7 +60,7 @@ export default function Classes({ navigation }: Props) {
         }
       })
     } catch (err: any) {
-      alert('Error getting classes, plesae try again later')
+      alert('Error getting classes, please try again later')
       setClasses((prevState) => {
         return {
           ...prevState,
@@ -79,6 +79,23 @@ export default function Classes({ navigation }: Props) {
       return {
         ...prevState,
         classes: prevState.classes.filter((item) => item.class_id !== classId)
+      }
+    })
+  }
+
+  function changeJoinedStatus(classId: number) {
+    setClasses((prevState) => {
+      return {
+        ...prevState,
+        classes: prevState.classes.map((item) => {
+          if (item.class_id === classId) {
+            return {
+              ...item,
+              joined: !item.joined
+            }
+          }
+          return item
+        })
       }
     })
   }
@@ -105,16 +122,6 @@ export default function Classes({ navigation }: Props) {
     getClasses()
   }, []);
 
-  //join class passed to student class component
-  async function joinClass(classId: number, studentId: number) {
-    console.log('join class')
-  }
-  
-  //leave class passed to student class component
-  function leaveClass(classId: number, studentId: number) {
-    console.log('leave class')
-  }
-
   return (
     <>
     {classes.isLoading ? <Loading /> : (
@@ -134,7 +141,7 @@ export default function Classes({ navigation }: Props) {
             </View>
             <Text style={tw` text-4xl text-blue-600`}>Your classes</Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} />}>
-              {classes.classes.map((classObj: any) => { return <StudentClass removeSelf={removeClassFromState} key={classObj.class_id} className={classObj.class_id} classId={classObj.class_id} studentId={Number(authState?.userId)} joinClass={joinClass} leaveClass={leaveClass} joinedStatus={classObj.joined}/>})}
+              {classes.classes.map((classObj: any) => { return <StudentClass removeSelf={removeClassFromState} joinSelf={changeJoinedStatus} key={classObj.class_id} className={classObj.class_id} classId={classObj.class_id} studentId={Number(authState?.userId)} joinedStatus={classObj.joined}/>})}
             </ScrollView>
             <View style={tw` bg-red-800 mt-auto`}>
               <Button onPress={() => navigation.navigate('Students')} title="Go to students"/>
