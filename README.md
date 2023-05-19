@@ -9,8 +9,13 @@ TODOS:
   - design loading screen
   - Classes scrolling DONE
   - refresh on pull down DONE
+  - student join class functionality
+  - render invites at the bottom
+  - student leave class functionality
+  - check how JSON parses number strings
+  - move joinclass, leaveclass to class nodes
   - add new class functionality
   - default avatar
   - change password fields to invisible
-  - caching in react native
+  - caching in react native + offline acces
   - random avatar generation + storage (generate random injection varaibles to preset svgs and save only the generated values)
