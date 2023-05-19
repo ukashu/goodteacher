@@ -1,16 +1,16 @@
 import { View, Text, Button, ScrollView, RefreshControl } from 'react-native';
 import { Dimensions } from 'react-native';
 import React from 'react';
+import tw from 'twrnc';
 import { useAuth } from '../context/AuthContext';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackActions } from '@react-navigation/native';
 import { RootStackParamList } from '../../App';
-import tw from 'twrnc';
 import Background from '../../assets/background.svg';
 import CustomButton from '../components/CustomButton';
 import BackButton from '../components/BackButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Class from '../components/Class';
+import StudentClass from '../components/StudentClass';
 import { API_URL } from '../context/AuthContext';
 import axios from 'axios'
 import Loading from './Loading';
@@ -74,6 +74,15 @@ export default function Classes({ navigation }: Props) {
     }
   }
 
+  function removeClassFromState(classId: number) {
+    setClasses((prevState) => {
+      return {
+        ...prevState,
+        classes: prevState.classes.filter((item) => item.class_id !== classId)
+      }
+    })
+  }
+
   //useEffect getclasses once
   React.useEffect(() => {
     getClasses()
@@ -89,11 +98,22 @@ export default function Classes({ navigation }: Props) {
     setClasses((prevState) => {
       return {
         ...prevState,
+        //classes: [], <- this lets classes rerender on refresh
         isRefreshing: true,
       }
     })
     getClasses()
   }, []);
+
+  //join class passed to student class component
+  async function joinClass(classId: number, studentId: number) {
+    console.log('join class')
+  }
+  
+  //leave class passed to student class component
+  function leaveClass(classId: number, studentId: number) {
+    console.log('leave class')
+  }
 
   return (
     <>
@@ -114,10 +134,9 @@ export default function Classes({ navigation }: Props) {
             </View>
             <Text style={tw` text-4xl text-blue-600`}>Your classes</Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} />}>
-              {classes.classes.map((classObj: any) => { return <Class key={classObj.class_id} className={classObj.class_id} joinedStatus={classObj.joined}/>})}
+              {classes.classes.map((classObj: any) => { return <StudentClass removeSelf={removeClassFromState} key={classObj.class_id} className={classObj.class_id} classId={classObj.class_id} studentId={Number(authState?.userId)} joinClass={joinClass} leaveClass={leaveClass} joinedStatus={classObj.joined}/>})}
             </ScrollView>
             <View style={tw` bg-red-800 mt-auto`}>
-              <Button onPress={getClasses} title="Fetch classes test"/>
               <Button onPress={() => navigation.navigate('Students')} title="Go to students"/>
             </View>
           </View>

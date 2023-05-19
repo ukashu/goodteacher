@@ -14,6 +14,7 @@ TODOS:
   - student leave class functionality
   - check how JSON parses number strings
   - move joinclass, leaveclass to class nodes
+  - fake class deletion, or joining in UI (set to invisible on leaveClass, figure out a way to set back to visible on refresh - currently it works on reopening the app)
   - add new class functionality
   - default avatar
   - change password fields to invisible
