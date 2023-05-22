@@ -1,5 +1,6 @@
 TODOS:
   - add frontend error handling
+  - add frontend input validation to offload the server
   - loading functionality
   - fonts
   - fetch classes functionality DONE
