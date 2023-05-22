@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { View, Text, TouchableOpacity, TouchableOpacityProps, Alert } from 'react-native';
 import ClassAvatar from './ClassAvatar';
 import CustomButton from './CustomButton';
 import React from 'react';
@@ -31,6 +31,17 @@ export default function StudentClass(props : StudentClassProps) {
     isSuccess: false,
     message: null,
   })
+
+  const createTwoButtonLeaveAlert = (classId: number, studentId: number) =>
+    Alert.alert('Caution', 'You\'re about to leave a class: this is a permanent action', [
+      {
+        text: 'CANCEL',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'LEAVE', onPress: () => leaveClass(classId, studentId)},
+    ]
+  );
 
   function goToTasks() {
     console.log('go to tasks')
@@ -98,7 +109,7 @@ export default function StudentClass(props : StudentClassProps) {
     return (
       <View style={tw`px-3`}>
         <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-blue-500 rounded-lg`}>
-          <TouchableOpacity style={tw` w-100% rounded-lg h-100% flex-row p-3 justify-between`}>
+          <TouchableOpacity onLongPress={() => {createTwoButtonLeaveAlert(props.classId, props.studentId)}} style={tw` w-100% rounded-lg h-100% flex-row p-3 justify-between`}>
             <View style={tw``}>
               <Text style={tw`text-xl text-white`}>{props.className}</Text>
               <Text style={tw` text-base text-white`}>{`joined status: ${props.joinedStatus}`}</Text>
