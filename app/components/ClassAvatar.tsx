@@ -4,7 +4,7 @@ import tw from 'twrnc';
 
 export default function ClassAvatar() {
   return (
-    <View style={tw`bg-slate-300 rounded-md h-100% aspect-square`}>
+    <View style={tw` rounded-md h-100% aspect-square`}>
       <Text >Class avatar</Text>
     </View>
   )

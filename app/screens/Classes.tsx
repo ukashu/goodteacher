@@ -1,15 +1,15 @@
-import { View, Text, Button, ScrollView, RefreshControl, Alert, ImageBackground } from 'react-native';
+import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
 import React from 'react';
 import tw from 'twrnc';
+import { Ionicons } from '@expo/vector-icons'; 
 import { useAuth } from '../context/AuthContext';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackActions } from '@react-navigation/native';
 import { RootStackParamList } from '../../App';
 import Background from '../../assets/background.svg';
 import CustomButton from '../components/CustomButton';
-import BackButton from '../components/BackButton';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import StudentClass from '../components/StudentClass';
 import TeacherClass from '../components/TeacherClass';
 import { API_URL } from '../context/AuthContext';
@@ -139,9 +139,11 @@ export default function Classes({ navigation }: Props) {
       }}>
         <View>
           <Background width="100%" height="110%" preserveAspectRatio="none" style={tw`absolute z-1`}/>
-          <View style={tw`z-2 items-center m-auto h-100% w-100%`}>
-            <View style={tw` w-100% px-2 flex-row justify-between items-center mt-6`}>
-              <BackButton onPress={() => navigation.dispatch(StackActions.pop(1))}/>
+          <SafeAreaView style={tw`z-2 items-center h-100% w-100%`}>
+            <View style={tw` w-100% px-2 flex-row justify-between items-center`}>
+              <TouchableOpacity onPress={() => navigation.dispatch(StackActions.pop(1))}>
+                <Ionicons name="arrow-back" size={40} color="red"/>
+              </TouchableOpacity>
               <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-blue-500`}/>
             </View>
             <Text style={tw` text-4xl text-blue-600`}>Your classes</Text>
@@ -154,13 +156,13 @@ export default function Classes({ navigation }: Props) {
                 }
               })}
             </ScrollView>
-            <View style={tw` bg-red-800 mt-auto`}>
-              <Button onPress={() => setShowModal(prevState => !prevState)} title="New class"/>
+            <View style={tw` absolute bottom-0 right-0 m-10`}>
+              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New class" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
             </View>
             {showModal
-            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><NewClassModal setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
+            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><NewClassModal title="Add new class" shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
             : <></>}
-          </View>
+          </SafeAreaView>
         </View>
       </View>
     )}
