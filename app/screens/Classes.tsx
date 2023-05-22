@@ -1,4 +1,4 @@
-import { View, Text, Button, ScrollView, RefreshControl, Alert } from 'react-native';
+import { View, Text, Button, ScrollView, RefreshControl, Alert, ImageBackground } from 'react-native';
 import { Dimensions } from 'react-native';
 import React from 'react';
 import tw from 'twrnc';
@@ -15,6 +15,8 @@ import TeacherClass from '../components/TeacherClass';
 import { API_URL } from '../context/AuthContext';
 import axios from 'axios'
 import Loading from './Loading';
+import { BlurView } from 'expo-blur';
+import NewClassModal from '../components/NewClassModal';
 
 type ClassesNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -45,6 +47,8 @@ export default function Classes({ navigation }: Props) {
     isRefreshing: false,
     message: null,
   })
+
+  const [showModal, setShowModal] = React.useState<boolean>(false)
 
   const getClasses = async () => {
 
@@ -133,10 +137,10 @@ export default function Classes({ navigation }: Props) {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
       }}>
-        <SafeAreaView>
+        <View>
           <Background width="100%" height="110%" preserveAspectRatio="none" style={tw`absolute z-1`}/>
           <View style={tw`z-2 items-center m-auto h-100% w-100%`}>
-            <View style={tw` w-100% px-2 flex-row justify-between items-center`}>
+            <View style={tw` w-100% px-2 flex-row justify-between items-center mt-6`}>
               <BackButton onPress={() => navigation.dispatch(StackActions.pop(1))}/>
               <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-blue-500`}/>
             </View>
@@ -151,10 +155,13 @@ export default function Classes({ navigation }: Props) {
               })}
             </ScrollView>
             <View style={tw` bg-red-800 mt-auto`}>
-              <Button onPress={() => navigation.navigate('Students')} title="Go to students"/>
+              <Button onPress={() => setShowModal(prevState => !prevState)} title="New class"/>
             </View>
+            {showModal
+            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><NewClassModal setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
+            : <></>}
           </View>
-        </SafeAreaView>
+        </View>
       </View>
     )}
     </>
