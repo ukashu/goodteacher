@@ -1,4 +1,4 @@
-import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
 import React from 'react';
@@ -49,6 +49,14 @@ export default function Classes({ navigation }: Props) {
   })
 
   const [showModal, setShowModal] = React.useState<boolean>(false)
+
+  React.useEffect(() => {
+    if (showModal) {
+      fadeIn()
+    } else {
+      fadeOut()
+    }
+  }, [showModal])
 
   //useEffect getclasses once
   React.useEffect(() => {
@@ -126,6 +134,27 @@ export default function Classes({ navigation }: Props) {
     getClasses()
   }, []);
 
+  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+
+  const fadeIn = () => {
+    // Will change fadeAnim value to 1 in 5 seconds
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const fadeOut = () => {
+    // Will change fadeAnim value to 0 in 3 seconds
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
     <>
     {classes.isLoading ? <Loading /> : (
@@ -139,13 +168,10 @@ export default function Classes({ navigation }: Props) {
         <View>
           <Background width="100%" height="110%" preserveAspectRatio="none" style={tw`absolute z-1`}/>
           <SafeAreaView style={tw`z-2 items-center h-100% w-100%`}>
-            <View style={tw` w-100% px-2 flex-row justify-between items-center`}>
-              <TouchableOpacity onPress={() => navigation.dispatch(StackActions.pop(1))}>
-                <Ionicons name="arrow-back" size={40} color="red"/>
-              </TouchableOpacity>
-              <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-blue-500`}/>
+            <View style={tw` w-100% px-2 flex-row justify-end items-center`}>
+              <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 mt-2 mr-2 rounded-lg bg-blue-500`}/>
             </View>
-            <Text style={tw` text-4xl text-blue-600 my-5`}>Your <Text style={tw` font-bold`}>classes</Text></Text>
+            <Text style={tw` text-4xl text-blue-600 mt-3 mb-5`}>Your <Text style={tw` font-bold`}>classes</Text></Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} />}>
               {classes.classes.map((classObj: any) => { 
                 if (authState?.accountType === 'TEACHER') {
@@ -159,7 +185,20 @@ export default function Classes({ navigation }: Props) {
               <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New class" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
             </View>
             {showModal
-            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><AddModal resource="class" title="Add new class" shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
+            ? 
+              <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}>
+                <Animated.View
+                style={
+                  {
+                    // Bind opacity to animated value
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    opacity: fadeAnim,
+                  }}>
+                <AddModal resource="class" title="Add new class" shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/>
+                </Animated.View>
+              </BlurView>
             : <></>}
           </SafeAreaView>
         </View>
