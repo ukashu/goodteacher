@@ -8,6 +8,7 @@ import { API_URL } from '../context/AuthContext';
 type StudentProps = {
   studentId: number,
   studentAlias: string,
+  joinedStatus: boolean,
   deleteSelf: (classId: number) => void,
 }
 
@@ -27,7 +28,7 @@ export default function Student(props : StudentProps) {
   })
 
   const createTwoButtonDeleteAlert = () =>
-    Alert.alert('Caution', 'You\'re about to delete a class: this is a permanent action', [
+    Alert.alert('Caution', 'You\'re about to remove a student: this is a permanent action', [
       {
         text: 'CANCEL',
         onPress: () => console.log('Cancel Pressed'),

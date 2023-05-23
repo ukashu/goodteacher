@@ -44,23 +44,58 @@ export default function Students({ route, navigation }: StudentsProps) {
   const [showModal, setShowModal] = React.useState<boolean>(false)
 
   //use effect get students
+  React.useEffect(() => {
+    getStudents()
+  }, [])
 
   //function to get students
+  const getStudents = async () => {
+
+    try {
+      const res = await axios.get(`${API_URL}/classes/${route.params.classId}/students`)
+      console.log({res: res.data.studentsInClass})
+      setStudents((prevState) => {
+        return {
+          ...prevState,
+          students: res.data.studentsInClass,
+          isLoading: false,
+          isRefreshing: false,
+          isSuccess: true,
+          message: 'Success',
+        }
+      })
+    } catch (err: any) {
+      alert('Error getting students, please try again later')
+      setStudents((prevState) => {
+        return {
+          ...prevState,
+          isError: true,
+          isLoading: false,
+          isRefreshing: false,
+          isSuccess: false, //not sure if this is needed
+          message: 'Generic error',
+        }
+      })
+    }
+  }
 
   //function to add student
 
   //function to delete student
+  function deleteStudent() {
+    console.log('delete student')
+  }
 
   //function on refresh
   const onRefresh = React.useCallback(() => {
     setStudents((prevState) => {
       return {
         ...prevState,
-        //classes: [], <- this lets classes rerender on refresh
+        //students: [], <- this lets students rerender on refresh
         isRefreshing: true,
       }
     })
-    //getClasses()
+    getStudents()
   }, []);
 
   return (
@@ -81,14 +116,14 @@ export default function Students({ route, navigation }: StudentsProps) {
                 <Ionicons name="arrow-back" size={40} color="red"/>
               </TouchableOpacity>
             </View>
-            <Text style={tw` text-4xl text-blue-600`}>Your <Text style={tw` font-bold`}>students</Text></Text>
-            <Text style={tw` text-2xl text-blue-600`}>{route.params.className}</Text>
+            <Text style={tw` text-4xl text-blue-600 mt-5`}>Your <Text style={tw` font-bold`}>students</Text></Text>
+            <Text style={tw` text-2xl text-blue-600 mb-5`}>{route.params.className}</Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={students.isRefreshing} onRefresh={onRefresh} />}>
-              <Student studentId={1} studentAlias='ALIAS' deleteSelf={() => console.log('deleting self')}/>
+              {students.students.map((item) => <Student studentId={item.user_id} studentAlias={item.user_alias} joinedStatus={item.joined} deleteSelf={deleteStudent} key={item.user_id}/>)}
             </ScrollView>
             <Button onPress={() => navigation.navigate('Tasks')} title="Go to tasks"/>
             <View style={tw` absolute bottom-0 right-0 m-10`}>
-              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New student" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
+              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="Add student" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
             </View>
             {showModal
             ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><AddModal title="Add new student" shortInputs={["email", "alias"]} requestRoute="" forceRerender={() => console.log('force rerender')} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>

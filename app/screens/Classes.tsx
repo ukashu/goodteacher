@@ -50,6 +50,11 @@ export default function Classes({ navigation }: Props) {
 
   const [showModal, setShowModal] = React.useState<boolean>(false)
 
+  //useEffect getclasses once
+  React.useEffect(() => {
+    getClasses()
+  }, [])
+
   const getClasses = async () => {
 
     try {
@@ -105,11 +110,6 @@ export default function Classes({ navigation }: Props) {
     })
   }
 
-  //useEffect getclasses once
-  React.useEffect(() => {
-    getClasses()
-  }, [])
-
   //if isloading return loading component
   //if iserror alert error and reset classes object to default
   //add refresh on pull down (just reset classes object to default and call getclasses again)
@@ -145,7 +145,7 @@ export default function Classes({ navigation }: Props) {
               </TouchableOpacity>
               <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-blue-500`}/>
             </View>
-            <Text style={tw` text-4xl text-blue-600`}>Your <Text style={tw` font-bold`}>classes</Text></Text>
+            <Text style={tw` text-4xl text-blue-600 my-5`}>Your <Text style={tw` font-bold`}>classes</Text></Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} />}>
               {classes.classes.map((classObj: any) => { 
                 if (authState?.accountType === 'TEACHER') {
