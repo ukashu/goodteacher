@@ -63,7 +63,7 @@ export default function AddModal(props: AddModalProps) {
             <ClassAvatar/>
           </View>
           <View style={tw` mx-5 mb-5`}>
-            {props.shortInputs.map((item) => { return (<CustomInput onChangeText={(input: string) => handleInputChange(input, item)} placeholder={item} key={item}/>)})}
+            {props.shortInputs.map((item) => { return (<CustomInput onChangeText={(input: string) => handleInputChange(input, item)} placeholder={item} key={item} style={tw`mt-5`}/>)})}
           </View>
           <View style={tw` `}>
             <CustomButton title="Create class" onPress={createClass} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-blue-500`}/>

@@ -13,7 +13,7 @@ export type RootStackParamList = {
   Login: undefined,
   Register: undefined,
   Classes: undefined,
-  Students: undefined,
+  Students: { classId: number, className: string },
   Tasks: undefined
 };
 

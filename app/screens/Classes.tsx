@@ -16,7 +16,7 @@ import { API_URL } from '../context/AuthContext';
 import axios from 'axios'
 import Loading from './Loading';
 import { BlurView } from 'expo-blur';
-import NewClassModal from '../components/NewClassModal';
+import AddModal from '../components/AddModal';
 
 type ClassesNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -110,7 +110,6 @@ export default function Classes({ navigation }: Props) {
     getClasses()
   }, [])
 
-
   //if isloading return loading component
   //if iserror alert error and reset classes object to default
   //add refresh on pull down (just reset classes object to default and call getclasses again)
@@ -146,11 +145,11 @@ export default function Classes({ navigation }: Props) {
               </TouchableOpacity>
               <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-blue-500`}/>
             </View>
-            <Text style={tw` text-4xl text-blue-600`}>Your classes</Text>
+            <Text style={tw` text-4xl text-blue-600`}>Your <Text style={tw` font-bold`}>classes</Text></Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} />}>
               {classes.classes.map((classObj: any) => { 
                 if (authState?.accountType === 'TEACHER') {
-                  return <TeacherClass removeSelf={removeClassFromState} key={classObj.id} className={classObj.name} classId={classObj.id}/>
+                  return <TeacherClass removeSelf={removeClassFromState} goToStudents={() => navigation.navigate('Students', { classId: classObj.id, className: classObj.name })} key={classObj.id} className={classObj.name} classId={classObj.id}/>
                 } else {
                   return <StudentClass removeSelf={removeClassFromState} joinSelf={changeJoinedStatus} key={classObj.class_id} className={classObj.class_id} classId={classObj.class_id} studentId={Number(authState?.userId)} joinedStatus={classObj.joined}/>
                 }
@@ -160,7 +159,7 @@ export default function Classes({ navigation }: Props) {
               <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New class" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
             </View>
             {showModal
-            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><NewClassModal title="Add new class" shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
+            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><AddModal title="Add new class" shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
             : <></>}
           </SafeAreaView>
         </View>
