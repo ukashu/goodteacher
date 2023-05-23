@@ -6,8 +6,6 @@ import tw from 'twrnc';
 import axios from 'axios';
 import { API_URL } from '../context/AuthContext';
 
-// style={tw`h-34 mx-2 mb-2 rounded-lg`}
-
 type StudentClassProps = {
   classId: number,
   className: string,

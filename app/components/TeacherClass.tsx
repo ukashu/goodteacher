@@ -5,13 +5,12 @@ import tw from 'twrnc';
 import axios from 'axios';
 import { API_URL } from '../context/AuthContext';
 
-// style={tw`h-34 mx-2 mb-2 rounded-lg`}
-
 type TeacherClassProps = {
   classId: number,
   className: string,
   memberCount?: number,
   removeSelf: (classId: number) => void,
+  goToStudents: () => void,
 }
 
 type TeacherClassState = {
@@ -76,7 +75,7 @@ export default function StudentClass(props : TeacherClassProps) {
   return (
     <View style={tw`px-3`}>
       <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-blue-500 rounded-lg`}>
-        <TouchableOpacity onLongPress={() => {createTwoButtonDeleteAlert(props.classId)}} style={tw` w-100% rounded-lg h-100% flex-row p-3 justify-between`}>
+        <TouchableOpacity onPress={props.goToStudents} onLongPress={() => {createTwoButtonDeleteAlert(props.classId)}} style={tw` w-100% rounded-lg h-100% flex-row p-3 justify-between`}>
           <View style={tw``}>
             <Text style={tw`text-xl text-white`}>{props.className}</Text>
             <Text style={tw` text-base text-white`}>{`class id: ${props.classId}`}</Text>
