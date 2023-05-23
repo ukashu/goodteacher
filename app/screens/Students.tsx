@@ -126,7 +126,7 @@ export default function Students({ route, navigation }: StudentsProps) {
               <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="Add student" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
             </View>
             {showModal
-            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><AddModal title="Add new student" shortInputs={["email", "alias"]} requestRoute="" forceRerender={() => console.log('force rerender')} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
+            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><AddModal resource="student" title="Add new student" shortInputs={["email", "alias"]} requestRoute={`/classes/${route.params.classId}/students`} forceRerender={getStudents} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
             : <></>}
           </SafeAreaView>
         </View>

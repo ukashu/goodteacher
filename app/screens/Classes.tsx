@@ -159,7 +159,7 @@ export default function Classes({ navigation }: Props) {
               <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New class" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
             </View>
             {showModal
-            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><AddModal title="Add new class" shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
+            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><AddModal resource="class" title="Add new class" shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
             : <></>}
           </SafeAreaView>
         </View>

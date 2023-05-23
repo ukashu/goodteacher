@@ -97,7 +97,7 @@ export default function Tasks({ navigation }: Props) {
               <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New task" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
             </View>
             {showModal
-            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><AddModal title="Add new task" shortInputs={["name", "content"]} requestRoute="" forceRerender={() => console.log('force rerender')} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
+            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><AddModal resource="task" title="Add new task" shortInputs={["name", "content"]} requestRoute="" forceRerender={() => console.log('force rerender')} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
             : <></>}
           </SafeAreaView>
         </View>
