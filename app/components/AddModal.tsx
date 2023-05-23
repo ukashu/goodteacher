@@ -10,6 +10,7 @@ import axios from 'axios'
 
 type AddModalProps = {
   title: string,
+  resource: string,
   shortInputs: Array<string>,
   requestRoute: string,
   forceRerender: () => void,
@@ -38,15 +39,17 @@ export default function AddModal(props: AddModalProps) {
     })
   }
 
-  const createClass = async () => {
+  const createResource = async () => {
     try {
       const res = await axios.post(`${API_URL}${props.requestRoute}`, inputs)
       console.log(res.data)
       props.setShowModal()
       props.forceRerender()
-    } catch (error) {
-      alert('Error creating class, please try again later')
-      console.log(error)
+    } catch (error: any) {
+      if (error.response.data.message) {
+        return alert(error.response.data.message)
+      }
+      alert(`Error adding ${props.resource}, please try again later`)
     }
   }
 
@@ -66,7 +69,7 @@ export default function AddModal(props: AddModalProps) {
             {props.shortInputs.map((item) => { return (<CustomInput onChangeText={(input: string) => handleInputChange(input, item)} placeholder={item} key={item} style={tw`mt-5`}/>)})}
           </View>
           <View style={tw` `}>
-            <CustomButton title="Create class" onPress={createClass} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-blue-500`}/>
+            <CustomButton title={`Add ${props.resource}`} onPress={createResource} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-blue-500`}/>
           </View>
         </View>
       </View>
