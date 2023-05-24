@@ -139,7 +139,7 @@ export default function Tasks({ route, navigation }: TasksProps) {
               opacity: fadeAnim,
             }}>
               <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}>
-                <AddModal resource="task" title="Add new task" shortInputs={["name", "content"]} requestRoute="" forceRerender={() => console.log('force rerender')} setShowModal={() => setShowModal(prevState => !prevState)}/>
+                <AddModal resource="task" title="Add new task" shortInputs={["title", "content"]} requestRoute="" forceRerender={() => console.log('force rerender')} setShowModal={() => setShowModal(prevState => !prevState)}/>
               </BlurView>
             </Animated.View>
             : <></>}
