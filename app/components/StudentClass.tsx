@@ -8,9 +8,9 @@ import { API_URL } from '../context/AuthContext';
 
 type StudentClassProps = {
   classId: number,
+  studentId: number,
   className: string,
   joinedStatus: boolean,
-  studentId: number,
   removeSelf: (classId: number) => void,
   joinSelf: (classId: number) => void,
 }

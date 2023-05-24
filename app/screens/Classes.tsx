@@ -171,7 +171,7 @@ export default function Classes({ navigation }: Props) {
               <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 mt-2 mr-2 rounded-lg bg-blue-500`}/>
             </View>
             <Text style={tw` text-4xl text-blue-600 mt-3 mb-5`}>Your <Text style={tw` font-bold`}>classes</Text></Text>
-            <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} />}>
+            <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} colors={["blue"]}/>}>
               {classes.classes.map((classObj: any) => { 
                 if (authState?.accountType === 'TEACHER') {
                   return <TeacherClass removeSelf={removeClassFromState} goToStudents={() => navigation.navigate('Students', { classId: classObj.id, className: classObj.name })} key={classObj.id} className={classObj.name} classId={classObj.id}/>
