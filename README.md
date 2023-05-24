@@ -25,3 +25,4 @@ TODOS:
   - maybe move common (background etc.) to separate page template component
   - change element size to smaller (font size in testing phone is set to small, so on regular phones elements will be larger)
   - button DELETE COMPLETED TASKS for teacher
+  - maybe change students screen to different layout? maybe tiles
