@@ -14,7 +14,7 @@ export type RootStackParamList = {
   Register: undefined,
   Classes: undefined,
   Students: { classId: number, className: string },
-  Tasks: undefined
+  Tasks: { classId: number, className: string, studentId: number, studentAlias: string },
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>()

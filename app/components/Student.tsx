@@ -10,6 +10,7 @@ type StudentProps = {
   classId: number,
   studentAlias: string,
   joinedStatus: boolean,
+  goToTasks: () => void,
   deleteSelf: (studentId: number) => void,
 }
 
@@ -41,7 +42,6 @@ export default function Student(props : StudentProps) {
 
   //function to delete student from class
   async function removeStudent(classId: number, studentId: number) {
-    console.log('remove student')
     try {
       const res = await axios.delete(`${API_URL}/classes/${classId}/students/${studentId}`)
       props.deleteSelf(studentId)
@@ -72,7 +72,7 @@ export default function Student(props : StudentProps) {
   return (
     <View style={tw`px-3`}>
       <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-blue-500 rounded-full`}>
-        <TouchableOpacity onLongPress={() => {createTwoButtonDeleteAlert()}} style={tw` w-100% rounded-full h-100% flex-row p-3 justify-between`}>
+        <TouchableOpacity onPress={props.goToTasks} onLongPress={() => {createTwoButtonDeleteAlert()}} style={tw` w-100% rounded-full h-100% flex-row p-3 justify-between`}>
           <View style={tw` ml-10`}>
             <Text style={tw`text-xl text-white`}>{props.studentAlias}</Text>
             <Text style={tw` text-base text-white`}>{`student id:`}</Text>
