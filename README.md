@@ -22,3 +22,6 @@ TODOS:
   - caching in react native + offline acces
   - random avatar generation + storage (generate random injection varaibles to preset svgs and save only the generated values)
   - add proper error displaying
+  - maybe move common (background etc.) to separate page template component
+  - change element size to smaller (font size in testing phone is set to small, so on regular phones elements will be larger)
+  - button DELETE COMPLETED TASKS for teacher
