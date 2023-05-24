@@ -7,9 +7,10 @@ import { API_URL } from '../context/AuthContext';
 
 type StudentProps = {
   studentId: number,
+  classId: number,
   studentAlias: string,
   joinedStatus: boolean,
-  deleteSelf: (classId: number) => void,
+  deleteSelf: (studentId: number) => void,
 }
 
 type StudentClassState = {
@@ -34,15 +35,39 @@ export default function Student(props : StudentProps) {
         onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
-      {text: 'DELETE', onPress: () => console.log('delete studfent')},
+      {text: 'DELETE', onPress: () => removeStudent(props.classId, props.studentId)},
     ]
   );
 
-  function goToTasks() {
-    console.log('go to tasks')
-  }
-
   //function to delete student from class
+  async function removeStudent(classId: number, studentId: number) {
+    console.log('remove student')
+    try {
+      const res = await axios.delete(`${API_URL}/classes/${classId}/students/${studentId}`)
+      props.deleteSelf(studentId)
+      setState((prevState) => {
+        return {
+          ...prevState,
+          isLoading: false,
+          isError: false,
+          isSuccess: true,
+          message: res.data.message ? res.data.message : 'Success',
+        }
+      })
+    } catch(err: any) {
+      console.log(err)
+      alert('Error removing student, please try again later')
+      setState((prevState) => {
+        return {
+          ...prevState,
+          isError: true,
+          isLoading: false,
+          isSuccess: false,
+          message: 'Generic error',
+        }
+      })
+    }
+  }
 
   return (
     <View style={tw`px-3`}>

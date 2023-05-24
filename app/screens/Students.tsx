@@ -1,4 +1,4 @@
-import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
 import React from 'react';
@@ -43,6 +43,14 @@ export default function Students({ route, navigation }: StudentsProps) {
 
   const [showModal, setShowModal] = React.useState<boolean>(false)
 
+  React.useEffect(() => {
+    if (showModal) {
+      fadeIn()
+    } else {
+      fadeOut()
+    }
+  }, [showModal])
+
   //use effect get students
   React.useEffect(() => {
     getStudents()
@@ -50,10 +58,8 @@ export default function Students({ route, navigation }: StudentsProps) {
 
   //function to get students
   const getStudents = async () => {
-
     try {
       const res = await axios.get(`${API_URL}/classes/${route.params.classId}/students`)
-      console.log({res: res.data.studentsInClass})
       setStudents((prevState) => {
         return {
           ...prevState,
@@ -81,9 +87,14 @@ export default function Students({ route, navigation }: StudentsProps) {
 
   //function to add student
 
-  //function to delete student
-  function deleteStudent() {
-    console.log('delete student')
+  //function to remove student from state
+  function removeStudentFromState(studentId: number) {
+    setStudents((prevState) => {
+      return {
+        ...prevState,
+        students: prevState.students.filter((item) => item.user_id !== studentId)
+      }
+    })
   }
 
   //function on refresh
@@ -97,6 +108,27 @@ export default function Students({ route, navigation }: StudentsProps) {
     })
     getStudents()
   }, []);
+
+  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+
+  const fadeIn = () => {
+    // Will change fadeAnim value to 1 in 300 ms
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const fadeOut = () => {
+    // Will change fadeAnim value to 0 in 100 ms
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
     <>
@@ -119,14 +151,27 @@ export default function Students({ route, navigation }: StudentsProps) {
             <Text style={tw` text-4xl text-blue-600 mt-5`}>Your <Text style={tw` font-bold`}>students</Text></Text>
             <Text style={tw` text-2xl text-blue-600 mb-5`}>{route.params.className}</Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={students.isRefreshing} onRefresh={onRefresh} />}>
-              {students.students.map((item) => <Student studentId={item.user_id} studentAlias={item.user_alias} joinedStatus={item.joined} deleteSelf={deleteStudent} key={item.user_id}/>)}
+              {students.students.map((item) => <Student studentId={item.user_id} classId={route.params.classId} studentAlias={item.user_alias} joinedStatus={item.joined} deleteSelf={removeStudentFromState} key={item.user_id}/>)}
             </ScrollView>
             <Button onPress={() => navigation.navigate('Tasks')} title="Go to tasks"/>
             <View style={tw` absolute bottom-0 right-0 m-10`}>
               <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="Add student" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
             </View>
             {showModal
-            ? <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}><AddModal resource="student" title="Add new student" shortInputs={["email", "alias"]} requestRoute={`/classes/${route.params.classId}/students`} forceRerender={getStudents} setShowModal={() => setShowModal(prevState => !prevState)}/></BlurView>
+            ? 
+            <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}>
+              <Animated.View
+              style={
+                {
+                  // Bind opacity to animated value
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  opacity: fadeAnim,
+                }}>
+                <AddModal resource="student" title="Add new student" shortInputs={["email", "alias"]} requestRoute={`/classes/${route.params.classId}/students`} forceRerender={getStudents} setShowModal={() => setShowModal(prevState => !prevState)}/>
+              </Animated.View>
+            </BlurView>
             : <></>}
           </SafeAreaView>
         </View>
