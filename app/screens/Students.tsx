@@ -56,7 +56,6 @@ export default function Students({ route, navigation }: StudentsProps) {
     getStudents()
   }, [])
 
-  //function to get students
   const getStudents = async () => {
     try {
       const res = await axios.get(`${API_URL}/classes/${route.params.classId}/students`)

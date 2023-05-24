@@ -42,7 +42,6 @@ export default function AddModal(props: AddModalProps) {
   const createResource = async () => {
     try {
       const res = await axios.post(`${API_URL}${props.requestRoute}`, inputs)
-      console.log(res.data)
       props.setShowModal()
       props.forceRerender()
     } catch (error: any) {
