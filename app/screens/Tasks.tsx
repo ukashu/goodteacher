@@ -53,18 +53,37 @@ export default function Tasks({ route, navigation }: TasksProps) {
   }, [showModal])
 
   //use effect get tasks
+  React.useEffect(() => {
+    getTasks()
+  }, [])
 
-  async function getTasks() {
-    console.log('getting tasks')
-  } 
-
-  async function addTask() {
-    console.log('adding task')
+  const getTasks = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/classes/${route.params.classId}/students/${route.params.studentId}/tasks`)
+      setTasks((prevState) => {
+        return {
+          ...prevState,
+          tasks: res.data.tasks,
+          isLoading: false,
+          isRefreshing: false,
+          isSuccess: true,
+          message: 'Success',
+        }
+      })
+    } catch (err: any) {
+      alert('Error getting tasks, please try again later')
+      setTasks((prevState) => {
+        return {
+          ...prevState,
+          isError: true,
+          isLoading: false,
+          isRefreshing: false,
+          isSuccess: false, //not sure if this is needed
+          message: 'Generic error',
+        }
+      })
+    }
   }
-
-  //function to delete task <- this will be in the task component
-
-  //function to update task <- this will be in the task component
 
   //function on refresh
   const onRefresh = React.useCallback(() => {
@@ -75,8 +94,17 @@ export default function Tasks({ route, navigation }: TasksProps) {
         isRefreshing: true,
       }
     })
-    //getTasks()
+    getTasks()
   }, []);
+
+  function removeTaskFromState(taskId: number) {
+    setTasks((prevState) => {
+      return {
+        ...prevState,
+        tasks: prevState.tasks.filter((item) => item.id !== taskId)
+      }
+    })
+  }
 
   // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
@@ -118,11 +146,8 @@ export default function Tasks({ route, navigation }: TasksProps) {
             <Text style={tw` text-4xl text-blue-600 mt-3`}>Your <Text style={tw` font-bold`}>tasks</Text></Text>
             <Text style={tw` text-3xl text-blue-600`}>{route.params.studentAlias}</Text>
             <Text style={tw` text-base text-blue-600 mb-5`}>{route.params.className}</Text>
-            <ScrollView style={tw` w-100%`} refreshControl={<RefreshControl refreshing={tasks.isRefreshing} onRefresh={onRefresh} colors={["blue"]}/>}>
-              <Task title="Task 1" content="This is the content of task 1, feel free to leave feedback, and whenever you want to say something, or whatever - you can do that" completed={false} />
-              <Task title="Task 2" completed={false} />
-              <Task title="Task 3" content="This is the content of task 1, feel free to leave feedback, and whenever you want to say something, or whatever - you can do that" completed={false} />
-              {}
+            <ScrollView style={tw` w-100% px-2`} refreshControl={<RefreshControl refreshing={tasks.isRefreshing} onRefresh={onRefresh} colors={["blue"]}/>}>
+              {tasks.tasks.map((item) => <Task title={item.title} description={item.description ? item.description : undefined} completed={item.completed} deleteSelf={removeTaskFromState} id={item.id} classId={route.params.classId} studentId={route.params.studentId} key={item.id}/>)}
             </ScrollView>
             <View style={tw` absolute bottom-0 right-0 m-10`}>
               <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New task" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
@@ -139,7 +164,7 @@ export default function Tasks({ route, navigation }: TasksProps) {
               opacity: fadeAnim,
             }}>
               <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}>
-                <AddModal resource="task" title="Add new task" shortInputs={["title", "description"]} requestRoute="" forceRerender={() => console.log('force rerender')} setShowModal={() => setShowModal(prevState => !prevState)}/>
+                <AddModal resource="task" title="Add new task" shortInputs={["title", "description"]} requestRoute={`/classes/${route.params.classId}/students/${route.params.studentId}/tasks`} forceRerender={getTasks} setShowModal={() => setShowModal(prevState => !prevState)}/>
               </BlurView>
             </Animated.View>
             : <></>}

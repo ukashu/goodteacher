@@ -1,42 +1,94 @@
-import { View, Text, TouchableOpacity, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Button, Alert } from 'react-native';
 import React from 'react';
+import axios from 'axios';
+import { API_URL } from '../context/AuthContext';
 import tw from 'twrnc';
 import Checkbox from './Checkbox';
 import { Ionicons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons'; 
 
 type TaskProps = {
+  studentId: number,
+  classId: number,
   title: string,
-  content?: string,
+  description?: string,
   completed: boolean,
+  id: number,
+  deleteSelf: (taskId: number) => void,
 }
 
 type TaskState = {
-
+  isLoading: boolean,
+  isError: boolean,
+  isSuccess: boolean,
+  message: string | null,
 }
 
 export default function Task(props: TaskProps) {
+  const [state, setState] = React.useState<TaskState>({
+    isLoading: false,
+    isError: false,
+    isSuccess: false,
+    message: null,
+  })
   const [completed, setCompleted] = React.useState<boolean>(props.completed)
   const [showMore, setShowMore] = React.useState<boolean>(false)
+
+  const createTwoButtonDeleteAlert = () =>
+    Alert.alert('Caution', 'You\'re about to remove a task: this is a permanent action', [
+      {
+        text: 'CANCEL',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'DELETE', onPress: () => deleteTask(props.classId, props.studentId, props.id)},
+    ]
+  );
 
   async function changeTasksCompleteState() {
     console.log('changing tasks complete state')
   }
 
-  async function deleteTask() {
-    console.log('deleting task')
+  async function deleteTask(classId: number, studentId: number, taskId: number) {
+    try {
+      const res = await axios.delete(`${API_URL}/classes/${classId}/students/${studentId}/tasks/${taskId}`)
+      props.deleteSelf(taskId)
+      setState((prevState) => {
+        return {
+          ...prevState,
+          isLoading: false,
+          isError: false,
+          isSuccess: true,
+          message: res.data.message ? res.data.message : 'Success',
+        }
+      })
+    } catch(err: any) {
+      console.log(err)
+      alert('Error removing task, please try again later')
+      setState((prevState) => {
+        return {
+          ...prevState,
+          isError: true,
+          isLoading: false,
+          isSuccess: false,
+          message: 'Generic error',
+        }
+      })
+    }
   }
 
   return (
     <View style={tw` w-100% px-5 mt-2`}>
-      <TouchableOpacity onPress={() => {setShowMore(prevState => !prevState)}} style={tw` flex-row items-center`}>
+      <TouchableOpacity onPress={() => {setShowMore(prevState => !prevState)}} onLongPress={createTwoButtonDeleteAlert} style={tw` flex-row items-center min-h-10`}>
         <Checkbox state={completed} onPress={() => setCompleted(prevState => !prevState)}/>
         <Text style={tw` text-xl text-blue-600 ml-4`}>{props.title}</Text>
-        {props.content ? <Ionicons style={tw` ml-auto`} name={showMore ? "remove-outline" : "add-outline"} size={40} color="blue" /> : <></>}
+        {props.description ? <Entypo style={tw` ml-auto`} name={showMore ? "chevron-up" : "chevron-down"} size={34} color="blue" /> : <></>}
       </TouchableOpacity>
-      {props.content && showMore 
+      {props.description && showMore 
       ?
       <View style={tw` w-100%`}>
-        <Text style={tw` text-base text-blue-600`}>{props.content}</Text>
+        <Text style={tw` text-base text-blue-600`}>{props.description}</Text>
       </View>
       : <></>}
     </View>
