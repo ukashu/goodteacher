@@ -76,8 +76,6 @@ export const AuthProvider = ({ children }: any) => {
 
       const auth: AuthStorageType = {token: result.data.token, userId: result.data.id, accountType: result.data.accountType, name: result.data.name, email: result.data.email}
 
-      console.log({data: result.data})
-
       setAuthState({
         token: result.data.token,
         accountType: result.data.accountType,
