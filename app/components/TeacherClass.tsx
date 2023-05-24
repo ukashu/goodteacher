@@ -39,12 +39,7 @@ export default function StudentClass(props : TeacherClassProps) {
     ]
   );
 
-  function goToStudents() {
-  console.log('go to students')
-  }
-
   async function deleteClass(classId: number) {
-
     try {
       const res = await axios.delete(`${API_URL}/classes/${classId}`)
       props.removeSelf(classId)

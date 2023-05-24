@@ -64,7 +64,6 @@ export default function Classes({ navigation }: Props) {
   }, [])
 
   const getClasses = async () => {
-
     try {
       const res = await axios.get(`${API_URL}/classes`)
       setClasses((prevState) => {
@@ -138,7 +137,7 @@ export default function Classes({ navigation }: Props) {
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
 
   const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
+    // Will change fadeAnim value to 1 in 300 ms
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 300,
@@ -147,7 +146,7 @@ export default function Classes({ navigation }: Props) {
   };
 
   const fadeOut = () => {
-    // Will change fadeAnim value to 0 in 3 seconds
+    // Will change fadeAnim value to 0 in 100 ms
     Animated.timing(fadeAnim, {
       toValue: 0,
       duration: 100,
