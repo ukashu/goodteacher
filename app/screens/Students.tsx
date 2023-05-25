@@ -36,7 +36,7 @@ export default function Students({ route, navigation }: StudentsProps) {
     students: [],
     isError: false,
     isSuccess: false,
-    isLoading: false, //change to true in production
+    isLoading: true,
     isRefreshing: false,
     message: null,
   })

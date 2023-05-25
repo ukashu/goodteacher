@@ -37,7 +37,7 @@ export default function Tasks({ route, navigation }: TasksProps) {
     tasks: [],
     isError: false,
     isSuccess: false,
-    isLoading: false, //change to true in production
+    isLoading: true,
     isRefreshing: false,
     message: null,
   })

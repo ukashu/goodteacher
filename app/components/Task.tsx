@@ -4,8 +4,6 @@ import axios from 'axios';
 import { API_URL } from '../context/AuthContext';
 import tw from 'twrnc';
 import Checkbox from './Checkbox';
-import { Ionicons } from '@expo/vector-icons'; 
-import { MaterialIcons } from '@expo/vector-icons'; 
 import { Entypo } from '@expo/vector-icons'; 
 
 type TaskProps = {
