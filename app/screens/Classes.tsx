@@ -172,11 +172,11 @@ export default function Classes({ navigation }: Props) {
             </View>
             <Text style={tw` text-4xl text-blue-600 mt-3 mb-5`}>Your <Text style={tw` font-bold`}>classes</Text></Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} colors={["blue"]}/>}>
-              {classes.classes.map((classObj: any) => { 
+              {classes.classes.map((item) => { 
                 if (authState?.accountType === 'TEACHER') {
-                  return <TeacherClass removeSelf={removeClassFromState} goToStudents={() => navigation.navigate('Students', { classId: classObj.id, className: classObj.name })} key={classObj.id} className={classObj.name} classId={classObj.id}/>
+                  return <TeacherClass removeSelf={removeClassFromState} goToStudents={() => navigation.navigate('Students', { classId: item.id, className: item.name })} key={item.id} className={item.name} classId={item.id}/>
                 } else {
-                  return <StudentClass removeSelf={removeClassFromState} joinSelf={changeJoinedStatus} key={classObj.class_id} className={classObj.class_id} classId={classObj.class_id} studentId={Number(authState?.userId)} joinedStatus={classObj.joined}/>
+                  return <StudentClass removeSelf={removeClassFromState} goToTasks={() => navigation.navigate('Tasks', { classId: item.class_id, className: item.name, studentAlias: item.user_alias, studentId: Number(authState?.userId) })} joinSelf={changeJoinedStatus} key={item.class_id} className={item.class_id} classId={item.class_id} studentId={Number(authState?.userId)} joinedStatus={item.joined}/>
                 }
               })}
             </ScrollView>
