@@ -2,6 +2,7 @@ import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
 import React from 'react';
+import { StatusBar } from 'expo-status-bar';
 import tw from 'twrnc';
 import { Ionicons } from '@expo/vector-icons'; 
 import { useAuth } from '../context/AuthContext';
@@ -164,6 +165,7 @@ export default function Classes({ navigation }: Props) {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
       }}>
+        <StatusBar translucent backgroundColor="transparent" />
         <View>
           <Background width="100%" height="110%" preserveAspectRatio="none" style={tw`absolute z-1`}/>
           <SafeAreaView style={tw`z-2 items-center h-100% w-100%`}>
