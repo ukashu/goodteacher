@@ -28,3 +28,4 @@ TODOS:
   - maybe change students screen to different layout? maybe tiles
   - all icons same thickness (at least most of them)
   - prevent student from deleting tasks in frontend
+  - in build there is a bar on top

@@ -165,7 +165,6 @@ export default function Classes({ navigation }: Props) {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
       }}>
-        <StatusBar translucent backgroundColor="transparent" />
         <View>
           <Background width="100%" height="110%" preserveAspectRatio="none" style={tw`absolute z-1`}/>
           <SafeAreaView style={tw`z-2 items-center h-100% w-100%`}>

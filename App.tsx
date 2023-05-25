@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthProvider, useAuth } from './app/context/AuthContext';
-import { SafeAreaView } from 'react-native-safe-area-context'; 
+import { StatusBar } from 'expo-status-bar';
 import Login from './app/screens/Login';
 import Register from './app/screens/Register';
 import Classes from './app/screens/Classes';
@@ -23,6 +23,7 @@ export default function App() {
 
   return (
     <AuthProvider>
+      <StatusBar translucent backgroundColor="transparent" />
       <Layout></Layout>
     </AuthProvider>
   );
