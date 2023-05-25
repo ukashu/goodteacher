@@ -35,7 +35,8 @@ export const Layout = () => {
   <NavigationContainer>
     <Stack.Navigator
       screenOptions={{
-        headerShown: false
+        headerShown: false,
+        animation: 'fade',
       }}>
       {authState?.authenticated ? (
         <>
