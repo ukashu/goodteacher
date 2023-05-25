@@ -1,22 +1,22 @@
 TODOS:
   - add frontend error handling
   - add frontend input validation to offload the server
-  - loading functionality
+  - loading functionality DONE
   - fonts
   - fetch classes functionality DONE
   - Store user id in secure storage + global auth context for future requests DONE
   - Store account type in secure storage + global auth context DONE
   - I should figure out what to do on error in axios request, what to render - right now isLoading gets changed to false so it loads the classes page (and retries the request apparently)
-  - design loading screen
+  - design loading screen DONEish
   - Classes scrolling DONE
   - refresh on pull down DONE
   - student join class functionality
   - render invites at the bottom
-  - student leave class functionality
+  - student leave class functionality DONE
   - check how JSON parses number strings
   - move joinclass, leaveclass to class nodes DONE
   - fake class deletion, or joining in UI (set to invisible on leaveClass, figure out a way to set back to visible on refresh - currently it works on reopening the app) DONE
-  - add new class functionality
+  - add new class functionality DONE
   - default avatar
   - change password fields to invisible
   - caching in react native + offline acces

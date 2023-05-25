@@ -44,8 +44,32 @@ export default function Task(props: TaskProps) {
     ]
   );
 
-  async function changeTasksCompleteState() {
-    console.log('changing tasks complete state')
+  async function changeTasksCompleteState(classId: number, studentId: number, taskId: number) {
+    try {
+      const res = await axios.put(`${API_URL}/classes/${classId}/students/${studentId}/tasks/${taskId}`, {completed: !completed})
+      setCompleted(prevState => !prevState)
+      setState((prevState) => {
+        return {
+          ...prevState,
+          isLoading: false,
+          isError: false,
+          isSuccess: true,
+          message: res.data.message ? res.data.message : 'Success',
+        }
+      })
+    } catch(err: any) {
+      console.log(err.response.data)
+      alert('Error updating task, please try again later')
+      setState((prevState) => {
+        return {
+          ...prevState,
+          isError: true,
+          isLoading: false,
+          isSuccess: false,
+          message: 'Generic error',
+        }
+      })
+    }
   }
 
   async function deleteTask(classId: number, studentId: number, taskId: number) {
@@ -79,7 +103,7 @@ export default function Task(props: TaskProps) {
   return (
     <View style={tw` w-100% px-5 mt-2`}>
       <TouchableOpacity onPress={() => {setShowMore(prevState => !prevState)}} onLongPress={createTwoButtonDeleteAlert} style={tw` flex-row items-center min-h-10`}>
-        <Checkbox state={completed} onPress={() => setCompleted(prevState => !prevState)}/>
+        <Checkbox state={completed} onPress={() => changeTasksCompleteState(props.classId, props.studentId, props.id)}/>
         <Text style={tw` text-xl text-blue-600 ml-4`}>{props.title}</Text>
         {props.description ? <Entypo style={tw` ml-auto`} name={showMore ? "chevron-up" : "chevron-down"} size={34} color="blue" /> : <></>}
       </TouchableOpacity>
