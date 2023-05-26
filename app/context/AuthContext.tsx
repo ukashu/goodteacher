@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios'
 import * as SecureStore from 'expo-secure-store'
 
-interface AuthContextProps {
+export interface AuthContextProps {
   authState?: { token: string | null, authenticated: boolean | null, accountType: string | null, userId: string | null };
   onRegister?: (name: string, email: string, password: string, passwordConfirmation: string, type: string) => Promise<any>;
   onLogin?: (email: string, password: string) => Promise<any>;

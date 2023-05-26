@@ -18,6 +18,7 @@ import axios from 'axios'
 import Loading from './Loading';
 import { BlurView } from 'expo-blur';
 import AddModal from '../components/AddModal';
+import { catchTokenExpiredError } from '../utils/utils';
 
 type ClassesNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -78,6 +79,7 @@ export default function Classes({ navigation }: Props) {
         }
       })
     } catch (err: any) {
+      catchTokenExpiredError(err, onLogout)
       alert('Error getting classes, please try again later')
       setClasses((prevState) => {
         return {
