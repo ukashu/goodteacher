@@ -32,3 +32,6 @@ TODOS:
   - make square app logo
   - description input field should change size + it is not centered when typing
   - language settings
+  - add custom colors to tailwind and use them in app
+  - make logo/icon + splash screen
+  - if token expires, remove token from storage, handle this globally in app
