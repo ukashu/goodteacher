@@ -29,13 +29,12 @@ export default function Register({ navigation }: Props) {
 
   const register = async () => {
     const result = await onRegister!({name, email, password, passwordConfirmation, type: isTeacher?'TEACHER':'STUDENT'})
-    if (result && result.error) {
+    if (result.msg) {
       alert(result.msg)
-    } else 
-    if (result && result.data.error && result.data.message) {
+    } else if (result.data.message) {
       alert(result.data.message)
     } else {
-      alert('Registered successfully, we sent you an email with a link to activate your account')
+      alert('Something went wrong, try again')
     }
   }
 

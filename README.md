@@ -36,3 +36,4 @@ TODOS:
   - make logo/icon + splash screen
   - if token expires, remove token from storage, handle this globally in app
   - axios makes requests two times in railway (may be some preflight or handshake or whatever)
+  - fix error handling,especially in Register nd Login
