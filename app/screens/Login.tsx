@@ -25,12 +25,8 @@ export default function Login({ navigation }: Props) {
 
   const login = async () => {
     const result = await onLogin!({email, password})
-    if (result.msg) {
+    if (result && result.error) {
       alert(result.msg)
-    } else if (result.data.message) {
-      alert(result.data.message)
-    } else {
-      alert('Something went wrong, try again')
     }
   }
 
