@@ -55,8 +55,8 @@ export default function Register({ navigation }: Props) {
           <View style={tw`w-100% h-75% justify-around items-center`}>
             <CustomInput placeholder="name" onChangeText={(text: string) => setName(text)} value={name} autoCapitalize='none'/>
             <CustomInput placeholder="email" onChangeText={(text: string) => setEmail(text)} value={email} autoCapitalize='none'/>
-            <CustomInput placeholder="password" secureTextEntry={true} onChangeText={(password: string) => setPassword(password)} value={password} autoCapitalize='none'/>
-            <CustomInput placeholder="confirm password" secureTextEntry={true} onChangeText={(password: string) => setPasswordConfirmation(password)} value={passwordConfirmation} autoCapitalize='none'/>
+            <CustomInput placeholder="password" secureTextEntry={false} onChangeText={(password: string) => setPassword(password)} value={password} autoCapitalize='none'/>
+            <CustomInput placeholder="confirm password" secureTextEntry={false} onChangeText={(password: string) => setPasswordConfirmation(password)} value={passwordConfirmation} autoCapitalize='none'/>
             <View style={tw`w-100% flex-row justify-between items-center`}>
               <View style={tw`flex-row justify-between items-center`}>
                 <Checkbox state={isTeacher} onPress={() => setIsTeacher(prevState=>!prevState)}/>
