@@ -7,10 +7,12 @@ import CustomButton from './CustomButton';
 import ClassAvatar from './ClassAvatar';
 import { API_URL } from '../context/AuthContext';
 import axios from 'axios'
+import z from 'zod'
+import * as schema from '../utils/schemas'
 
 type AddModalProps = {
   title: string,
-  resource: string,
+  resource: "class" | "student" | "task",
   shortInputs: Array<string>,
   requestRoute: string,
   forceRerender: () => void,
@@ -41,14 +43,20 @@ export default function AddModal(props: AddModalProps) {
 
   const createResource = async () => {
     try {
+      schema[`${props.resource}Schema`].parse(inputs)
+
       const res = await axios.post(`${API_URL}${props.requestRoute}`, inputs)
       props.setShowModal()
       props.forceRerender()
     } catch (error: any) {
-      if (error.response.data.message) {
-        return alert(error.response.data.message)
+      if (error instanceof z.ZodError) {
+        return alert(error.issues[0].message)
       }
-      alert(`Error adding ${props.resource}, please try again later`)
+      if (error.response != undefined && error.response.data.message) {
+        return alert(error.response.data.message)
+      } else {
+        alert(`Error adding ${props.resource}, please try again later`)
+      }
     }
   }
 
