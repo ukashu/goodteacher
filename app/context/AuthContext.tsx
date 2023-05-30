@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }: any) => {
       if (err.response && err.response.data.message) {
         return { error: true, msg: err.response.data.message }
       } 
-      return { error: true, msg: err}
+      return { error: true, msg: 'Register error'}
     }
   }
 
@@ -102,7 +102,7 @@ export const AuthProvider = ({ children }: any) => {
       if (err.response.data.message) {
         return { error: true, msg: err.response.data.message }
       } else {
-        return { error: true, msg: err}
+        return { error: true, msg: 'Login error'}
       }
     }
   }
