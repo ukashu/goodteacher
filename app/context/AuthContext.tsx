@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios'
 import * as SecureStore from 'expo-secure-store'
+import z from 'zod'
+import * as schema from '../utils/schemas'
 
 export interface AuthContextProps {
   authState?: { token: string | null, authenticated: boolean | null, accountType: string | null, userId: string | null };
-  onRegister?: (name: string, email: string, password: string, passwordConfirmation: string, type: string) => Promise<any>;
-  onLogin?: (email: string, password: string) => Promise<any>;
+  onRegister?: ({}: schema.RegisterUserInput) => Promise<any>;
+  onLogin?: ({}: schema.LoginUserInput) => Promise<any>;
   onLogout?: () => Promise<any>;
 }
 
@@ -58,21 +60,25 @@ export const AuthProvider = ({ children }: any) => {
     loadToken()
   }, [])
 
-  const register = async (name: string, email: string, password: string, passwordConfirmation: string, type: string) => {
+  const register = async (body: schema.RegisterUserInput) => {
     try {
-      return await axios.post(`${API_URL}/users`, { name, email, password, passwordConfirmation, type })
+      schema.registerUserSchema.parse({body})
+      return await axios.post(`${API_URL}/users`, { name: body.name, email: body.email, password: body.password, passwordConfirmation: body.passwordConfirmation, type: body.type })
     } catch(err: any) {
-      if (err.response.data.message) {
-        return { error: true, msg: err.response.data.message }
-      } else {
-        return { error: true, msg: err}
+      if (err instanceof z.ZodError) {
+        return { error: true, msg: err.issues[0].message }
       }
+      if (err.response && err.response.data.message) {
+        return { error: true, msg: err.response.data.message }
+      } 
+      return { error: true, msg: err}
     }
   }
 
-  const login = async (email: string, password: string) => {
+  const login = async (body: schema.LoginUserInput) => {
     try {
-      const result = await axios.post(`${API_URL}/users/session`, { email, password })
+      schema.loginUserSchema.parse({body})
+      const result = await axios.post(`${API_URL}/users/session`, { email: body.email, password: body.password })
 
       const auth: AuthStorageType = {token: result.data.token, userId: result.data.id, accountType: result.data.accountType, name: result.data.name, email: result.data.email}
 
@@ -90,7 +96,9 @@ export const AuthProvider = ({ children }: any) => {
       return result;
 
     } catch(err: any) {
-      console.log(err)
+      if (err instanceof z.ZodError) {
+        return { error: true, msg: err.issues[0].message }
+      }
       if (err.response.data.message) {
         return { error: true, msg: err.response.data.message }
       } else {

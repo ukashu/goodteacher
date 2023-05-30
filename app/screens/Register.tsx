@@ -28,7 +28,7 @@ export default function Register({ navigation }: Props) {
   const { onRegister } = useAuth()
 
   const register = async () => {
-    const result = await onRegister!(name, email, password, passwordConfirmation, isTeacher?'TEACHER':'STUDENT')
+    const result = await onRegister!({name, email, password, passwordConfirmation, type: isTeacher?'TEACHER':'STUDENT'})
     if (result && result.error) {
       alert(result.msg)
     } else 

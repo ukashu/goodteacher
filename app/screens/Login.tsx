@@ -24,7 +24,7 @@ export default function Login({ navigation }: Props) {
   const { onLogin } = useAuth()
 
   const login = async () => {
-    const result = await onLogin!(email, password)
+    const result = await onLogin!({email, password})
     if (result && result.error) {
       alert(result.msg)
     }
