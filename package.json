@@ -13,6 +13,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "axios": "^1.4.0",
     "expo": "~48.0.15",
+    "expo-blur": "~12.2.2",
     "expo-secure-store": "^12.1.1",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
@@ -22,7 +23,7 @@
     "react-native-svg": "13.4.0",
     "react-native-svg-transformer": "^1.0.0",
     "twrnc": "^3.6.0",
-    "expo-blur": "~12.2.2"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
