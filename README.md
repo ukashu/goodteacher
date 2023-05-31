@@ -37,3 +37,4 @@ TODOS:
   - if token expires, remove token from storage, handle this globally in app
   - axios makes requests two times in railway (may be some preflight or handshake or whatever)
   - fix error handling,especially in Register nd Login
+  - class onPress sometimes doesnt work, happened after adding dyamic background (its probably because the svgt element overflows its container) DONE

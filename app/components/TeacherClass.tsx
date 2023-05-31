@@ -75,7 +75,7 @@ export default function StudentClass(props : TeacherClassProps) {
     <View style={tw`px-3`}>
       <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-blue-500 rounded-lg`}>
         <ClassBackgroundSvg width="100%" height="100%" preserveAspectRatio="none" xOffset={props.xOffset} yOffset={props.yOffset} pathRotation={props.pathRotation} style={tw`absolute z-0`}/>
-        <TouchableOpacity onPress={props.goToStudents} onLongPress={() => {createTwoButtonDeleteAlert(props.classId)}} style={tw` w-100% rounded-lg h-100% flex-row p-3 justify-between`}>
+        <TouchableOpacity onPress={props.goToStudents} onLongPress={() => {createTwoButtonDeleteAlert(props.classId)}} style={tw` w-100% h-100% rounded-lg  flex-row p-3 justify-between`}>
           <View style={tw``}>
             <Text style={tw`text-xl text-white`}>{props.className}</Text>
             <Text style={tw` text-base text-white`}>{`class id: ${props.classId}`}</Text>
