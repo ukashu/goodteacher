@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Svg, { Path, Circle, Rect } from 'react-native-svg'
+import Svg, { Path, Circle, G, Rect } from 'react-native-svg'
 import { SvgProps } from 'react-native-svg';
 
 type Props = {
@@ -13,8 +13,10 @@ export default function ClassBackgroundSvg(props: SvgProps & Props) {
 
   return (
     <Svg viewBox="0 0 400 100" {...props}>
-      <Rect x="0" y="0" width="400" height="100" fill="#3083FF" rx="6"/>
-      <Path d={path} rotation={props.pathRotation} origin={`${27 + props.xOffset}, ${2 + props.yOffset}`} fill="#CC0000"/>
+      <G rx="6">
+        <Rect x="0" y="0" width="400" height="100" fill="#3083FF" rx="6"/>
+        <Path d={path} rotation={props.pathRotation} origin={`${27 + props.xOffset}, ${2 + props.yOffset}`} fill="#CC0000"/>
+      </G>
     </Svg>
   )
 }

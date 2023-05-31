@@ -2,12 +2,9 @@ import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import tw from 'twrnc';
-import { Ionicons } from '@expo/vector-icons'; 
 import { useAuth } from '../context/AuthContext';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackActions } from '@react-navigation/native';
 import { RootStackParamList } from '../../App';
 import Background from '../../assets/background.svg';
 import CustomButton from '../components/CustomButton';
@@ -177,7 +174,7 @@ export default function Classes({ navigation }: Props) {
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} colors={["blue"]}/>}>
               {classes.classes.map((item) => { 
                 if (authState?.accountType === 'TEACHER') {
-                  return <TeacherClass removeSelf={removeClassFromState} goToStudents={() => navigation.navigate('Students', { classId: item.id, className: item.name })} key={item.id} className={item.name} classId={item.id}/>
+                  return <TeacherClass removeSelf={removeClassFromState} goToStudents={() => navigation.navigate('Students', { classId: item.id, className: item.name })} key={item.id} className={item.name} classId={item.id} xOffset={item.x_offset} yOffset={item.y_offset} pathRotation={item.path_rotation}/>
                 } else {
                   return <StudentClass removeSelf={removeClassFromState} goToTasks={() => navigation.navigate('Tasks', { classId: item.class_id, className: item.name, studentAlias: item.user_alias, studentId: Number(authState?.userId) })} joinSelf={changeJoinedStatus} key={item.class_id} className={item.class_id} classId={item.class_id} studentId={Number(authState?.userId)} joinedStatus={item.joined}/>
                 }
