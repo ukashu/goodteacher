@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, TouchableOpacityProps, Alert } from 'reac
 import ClassAvatar from './ClassAvatar';
 import CustomButton from './CustomButton';
 import React from 'react';
-import tw from 'twrnc';
+import tw from '../../lib/tailwind';
 import axios from 'axios';
 import { API_URL } from '../context/AuthContext';
 
@@ -107,7 +107,7 @@ export default function StudentClass(props : StudentClassProps) {
 
     return (
       <View style={tw`px-3`}>
-        <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-blue-500 rounded-lg`}>
+        <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-custom-blue-dark rounded-lg`}>
           <TouchableOpacity onPress={props.goToTasks} onLongPress={() => {createTwoButtonLeaveAlert(props.classId, props.studentId)}} style={tw` w-100% rounded-lg h-100% flex-row p-3 justify-between`}>
             <View style={tw``}>
               <Text style={tw`text-xl text-white`}>{props.className}</Text>
@@ -118,24 +118,24 @@ export default function StudentClass(props : StudentClassProps) {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={tw`relative z-2 h-34 ml-1 mt-4 w-100% bg-red-600 rounded-lg`}></View>
+        <View style={tw`relative z-2 h-34 ml-1 mt-4 w-100% bg-custom-red-light rounded-lg`}></View>
       </View>
     )
     } else {
       return (
         <View style={tw`px-3`}>
-        <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-red-500 rounded-lg`}>
+        <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-custom-red-light rounded-lg`}>
           <TouchableOpacity style={tw` w-100% rounded-lg h-100% flex-row p-3 justify-between`}>
             <View style={tw` `}>
               <Text style={tw`text-xl text-white`}>{`Invite to class ${props.className}`}</Text>
             </View>
             <View style={tw` rounded-md h-100% aspect-square items-end justify-around`}>
-              <CustomButton onPress={() => {joinClass(props.classId, props.studentId)}} title="Join Class" style={tw`px-4 py-2 min-w-30 flex-grow-0 rounded-lg bg-blue-500`}/>
-              <CustomButton onPress={() => {leaveClass(props.classId, props.studentId)}} title="Leave Class" style={tw`px-4 py-2 min-w-30 flex-grow-0 rounded-lg bg-blue-500`}/>
+              <CustomButton onPress={() => {joinClass(props.classId, props.studentId)}} title="Join Class" style={tw`px-4 py-2 min-w-30 flex-grow-0 rounded-lg bg-custom-blue-dark`}/>
+              <CustomButton onPress={() => {leaveClass(props.classId, props.studentId)}} title="Leave Class" style={tw`px-4 py-2 min-w-30 flex-grow-0 rounded-lg bg-custom-blue-dark`}/>
             </View>
           </TouchableOpacity>
         </View>
-        <View style={tw`relative z-2 h-34 ml-1 mt-4 w-100% bg-blue-500 rounded-lg`}></View>
+        <View style={tw`relative z-2 h-34 ml-1 mt-4 w-100% bg-custom-blue-dark rounded-lg`}></View>
       </View>
       )
   }

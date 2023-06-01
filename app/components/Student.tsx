@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, TouchableOpacityProps, Alert } from 'react-native';
 import CustomButton from './CustomButton';
 import React from 'react';
-import tw from 'twrnc';
+import tw from '../../lib/tailwind';
 import axios from 'axios';
 import { API_URL } from '../context/AuthContext';
 
@@ -71,7 +71,7 @@ export default function Student(props : StudentProps) {
 
   return (
     <View style={tw`px-3`}>
-      <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-blue-500 rounded-full`}>
+      <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-custom-blue-dark rounded-full`}>
         <TouchableOpacity onPress={props.goToTasks} onLongPress={() => {createTwoButtonDeleteAlert()}} style={tw` w-100% rounded-full h-100% flex-row p-3 justify-between`}>
           <View style={tw` ml-10`}>
             <Text style={tw`text-xl text-white`}>{props.studentAlias}</Text>
@@ -81,7 +81,7 @@ export default function Student(props : StudentProps) {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={tw`relative z-2 h-34 ml-1 mt-4 w-100% bg-red-600 rounded-full`}></View>
+      <View style={tw`relative z-2 h-34 ml-1 mt-4 w-100% bg-custom-red-light rounded-full`}></View>
     </View>
   )
 }

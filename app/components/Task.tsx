@@ -105,7 +105,7 @@ export default function Task(props: TaskProps) {
       <TouchableOpacity onPress={() => {setShowMore(prevState => !prevState)}} onLongPress={createTwoButtonDeleteAlert} style={tw` flex-row items-center min-h-10`}>
         <Checkbox state={completed} onPress={() => changeTasksCompleteState(props.classId, props.studentId, props.id)}/>
         <Text style={tw` text-xl text-blue-600 ml-4`}>{props.title}</Text>
-        {props.description ? <Entypo style={tw` ml-auto`} name={showMore ? "chevron-up" : "chevron-down"} size={34} color="blue" /> : <></>}
+        {props.description ? <Entypo style={tw` ml-auto`} name={showMore ? "chevron-up" : "chevron-down"} size={34} color="#3083ff" /> : <></>}
       </TouchableOpacity>
       {props.description && showMore 
       ?

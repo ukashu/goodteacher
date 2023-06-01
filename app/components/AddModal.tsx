@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
-import tw from 'twrnc';
+import tw from '../../lib/tailwind';
 import { Ionicons } from '@expo/vector-icons'; 
 import CustomInput from './CustomInput';
 import CustomButton from './CustomButton';
@@ -62,11 +62,11 @@ export default function AddModal(props: AddModalProps) {
 
   return (
       <View style={tw`items-center p-10 justify-around my-auto`}>
-        <View style={tw`h-auto w-100% p-2 justify-between bg-red-500 rounded-lg`}>
+        <View style={tw`h-auto w-100% p-2 justify-between bg-custom-red-light rounded-lg shadow-md`}>
           <Text style={tw` absolute self-center text-white text-3xl text-center mt-3`}>{props.title}</Text>
           <View style={tw` flex-row justify-between mb-1`}>
             <TouchableOpacity onPress={props.setShowModal}>
-              <Ionicons name="arrow-back" size={40} color="blue"/>
+              <Ionicons name="arrow-back" size={40} color="#3083ff"/>
             </TouchableOpacity>  
           </View>
           <View style={tw`bg-white rounded-md w-25% self-end aspect-square`}>
@@ -76,7 +76,7 @@ export default function AddModal(props: AddModalProps) {
             {props.shortInputs.map((item) => { return (<CustomInput onChangeText={(input: string) => handleInputChange(input, item)} placeholder={item} key={item} style={tw`mt-5`} autoCapitalize='none'/>)})}
           </View>
           <View style={tw` `}>
-            <CustomButton title={`Add ${props.resource}`} onPress={createResource} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-blue-500`}/>
+            <CustomButton title={`Add ${props.resource}`} onPress={createResource} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-custom-blue-dark`}/>
           </View>
         </View>
       </View>

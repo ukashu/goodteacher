@@ -2,7 +2,7 @@ import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
 import React from 'react';
-import tw from 'twrnc';
+import tw from '../../lib/tailwind';
 import { useAuth } from '../context/AuthContext';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
@@ -168,10 +168,10 @@ export default function Classes({ navigation }: Props) {
           <Background width="100%" height="110%" preserveAspectRatio="none" style={tw`absolute z-1`}/>
           <SafeAreaView style={tw`z-2 items-center h-100% w-100%`}>
             <View style={tw` w-100% px-2 flex-row justify-end items-center`}>
-              <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 mt-2 mr-2 rounded-lg bg-blue-500`}/>
+              <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 mt-2 mr-2 rounded-lg bg-custom-blue-dark`}/>
             </View>
             <Text style={tw` text-4xl text-blue-600 mt-3 mb-5`}>Your <Text style={tw` font-bold`}>classes</Text></Text>
-            <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} colors={["blue"]}/>}>
+            <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} colors={["#3083ff"]}/>}>
               {classes.classes.map((item) => { 
                 if (authState?.accountType === 'TEACHER') {
                   return <TeacherClass removeSelf={removeClassFromState} goToStudents={() => navigation.navigate('Students', { classId: item.id, className: item.name })} key={item.id} className={item.name} classId={item.id} xOffset={item.x_offset} yOffset={item.y_offset} pathRotation={item.path_rotation}/>
@@ -181,7 +181,7 @@ export default function Classes({ navigation }: Props) {
               })}
             </ScrollView>
             <View style={tw` absolute bottom-0 right-0 m-10`}>
-              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New class" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
+              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New class" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-custom-red-light`}/>
             </View>
             {showModal
             ? 

@@ -2,14 +2,14 @@ import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
 import React from 'react';
-import tw from 'twrnc';
+import tw from '../../lib/tailwind';
 import { StackActions } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
 import Background from '../../assets/background.svg';
 import CustomButton from '../components/CustomButton';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons'; 
 import { useAuth } from '../context/AuthContext';
 import { API_URL } from '../context/AuthContext';
 import axios from 'axios'
@@ -141,7 +141,7 @@ export default function Tasks({ route, navigation }: TasksProps) {
           <Background width="100%" height="110%" preserveAspectRatio="none" style={tw`absolute z-1`}/>
           <SafeAreaView style={tw`z-2 items-center h-100% w-100%`}>
             <View style={tw` w-100% px-2 flex-row justify-between items-center`}>
-              <TouchableOpacity onPress={() => navigation.dispatch(StackActions.pop(1))}><Ionicons name="arrow-back" size={40} color="red"/></TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.dispatch(StackActions.pop(1))}><Entypo name="chevron-left" size={40} color="#ff0000"/></TouchableOpacity>
             </View>
             <Text style={tw` text-4xl text-blue-600 mt-3`}>Your <Text style={tw` font-bold`}>tasks</Text></Text>
             <Text style={tw` text-3xl text-blue-600`}>{route.params.studentAlias}</Text>
@@ -150,7 +150,7 @@ export default function Tasks({ route, navigation }: TasksProps) {
               {tasks.tasks.map((item) => <Task title={item.title} description={item.description ? item.description : undefined} completed={item.completed} deleteSelf={removeTaskFromState} id={item.id} classId={route.params.classId} studentId={route.params.studentId} key={item.id}/>)}
             </ScrollView>
             <View style={tw` absolute bottom-0 right-0 m-10`}>
-              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New task" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
+              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New task" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-custom-red-light`}/>
             </View>
             {showModal
             ? 

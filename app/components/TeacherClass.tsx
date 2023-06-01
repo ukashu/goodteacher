@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, TouchableOpacityProps, Alert } from 'react-native';
 import ClassAvatar from './ClassAvatar';
 import React from 'react';
-import tw from 'twrnc';
+import tw from '../../lib/tailwind';
 import axios from 'axios';
 import { API_URL } from '../context/AuthContext';
 import ClassBackgroundSvg from './svg/ClassBackgroundSvg';
@@ -73,7 +73,7 @@ export default function StudentClass(props : TeacherClassProps) {
 
   return (
     <View style={tw`px-3`}>
-      <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-blue-500 rounded-lg`}>
+      <View style={tw`absolute z-3 h-34 ml-3 mt-2 w-100% bg-custom-blue-dark rounded-lg`}>
         <ClassBackgroundSvg width="100%" height="100%" preserveAspectRatio="none" xOffset={props.xOffset} yOffset={props.yOffset} pathRotation={props.pathRotation} style={tw`absolute z-0`}/>
         <TouchableOpacity onPress={props.goToStudents} onLongPress={() => {createTwoButtonDeleteAlert(props.classId)}} style={tw` w-100% h-100% rounded-lg  flex-row p-3 justify-between`}>
           <View style={tw``}>
@@ -85,7 +85,7 @@ export default function StudentClass(props : TeacherClassProps) {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={tw`relative z-2 h-34 ml-1 mt-4 w-100% bg-red-600 rounded-lg`}></View>
+      <View style={tw`relative z-2 h-34 ml-1 mt-4 w-100% bg-custom-red-light rounded-lg`}></View>
     </View>
   )
 }

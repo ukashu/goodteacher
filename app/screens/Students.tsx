@@ -2,14 +2,14 @@ import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
 import React from 'react';
-import tw from 'twrnc';
+import tw from '../../lib/tailwind';
 import { StackActions } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
 import Background from '../../assets/background.svg';
 import CustomButton from '../components/CustomButton';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons'; 
 import { useAuth } from '../context/AuthContext';
 import { API_URL } from '../context/AuthContext';
 import axios from 'axios'
@@ -144,7 +144,7 @@ export default function Students({ route, navigation }: StudentsProps) {
           <SafeAreaView style={tw`z-2 items-center h-100% w-100%`}>
             <View style={tw` w-100% px-2 flex-row justify-between items-center`}>
               <TouchableOpacity onPress={() => navigation.dispatch(StackActions.pop(1))}>
-                <Ionicons name="arrow-back" size={40} color="red"/>
+                <Entypo name="chevron-left" size={40} color="#ff0000"/>
               </TouchableOpacity>
             </View>
             <Text style={tw` text-4xl text-blue-600 mt-5`}>Your <Text style={tw` font-bold`}>students</Text></Text>
@@ -153,7 +153,7 @@ export default function Students({ route, navigation }: StudentsProps) {
               {students.students.map((item) => <Student studentId={item.user_id} classId={route.params.classId} studentAlias={item.user_alias} joinedStatus={item.joined} deleteSelf={removeStudentFromState} key={item.user_id} goToTasks={() => navigation.navigate('Tasks', { classId: route.params.classId, className: route.params.className, studentId: item.user_id, studentAlias: item.user_alias })}/>)}
             </ScrollView>
             <View style={tw` absolute bottom-0 right-0 m-10`}>
-              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="Add student" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-red-500`}/>
+              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="Add student" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-custom-red-light `}/>
             </View>
             {showModal
             ? 
