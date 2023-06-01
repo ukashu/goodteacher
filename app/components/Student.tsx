@@ -4,6 +4,7 @@ import React from 'react';
 import tw from '../../lib/tailwind';
 import axios from 'axios';
 import { API_URL } from '../context/AuthContext';
+import StudentAvatarSvg from './svg/StudentAvatarSvg' 
 
 type StudentProps = {
   studentId: number,
@@ -78,6 +79,7 @@ export default function Student(props : StudentProps) {
             <Text style={tw` text-base text-white`}>{`student id:`}</Text>
           </View>
           <View style={tw`bg-white rounded-full h-100% aspect-square`}>
+            <StudentAvatarSvg studentAlias={props.studentAlias}/>
           </View>
         </TouchableOpacity>
       </View>
