@@ -17,6 +17,7 @@ import Loading from './Loading';
 import { BlurView } from 'expo-blur';
 import AddModal from '../components/AddModal';
 import Task from '../components/Task';
+import { catchTokenExpiredError } from '../utils/utils';
 
 
 type TasksProps = NativeStackScreenProps<RootStackParamList, 'Tasks'>;
@@ -31,7 +32,7 @@ type TasksState = {
 }
 
 export default function Tasks({ route, navigation }: TasksProps) {
-  const { authState } = useAuth()
+  const { authState, onLogout } = useAuth()
 
   const [tasks, setTasks] = React.useState<TasksState>({
     tasks: [],
@@ -71,6 +72,7 @@ export default function Tasks({ route, navigation }: TasksProps) {
         }
       })
     } catch (err: any) {
+      catchTokenExpiredError(err, onLogout)
       alert('Error getting tasks, please try again later')
       setTasks((prevState) => {
         return {

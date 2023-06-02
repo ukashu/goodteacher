@@ -44,3 +44,4 @@ TODOS:
   - remove class avatar
   - add student avatar to task screen maybe
   - caching for offline data access maybe
+  - add graphics for student side classes

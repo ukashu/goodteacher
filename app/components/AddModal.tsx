@@ -50,10 +50,9 @@ export default function AddModal(props: AddModalProps) {
       props.forceRerender()
     } catch (error: any) {
       if (error instanceof z.ZodError) {
-        return alert(error.issues[0].message)
-      }
-      if (error.response != undefined && error.response.data.message) {
-        return alert(error.response.data.message)
+        alert(error.issues[0].message)
+      } else if (error.response != undefined && error.response.data.message) {
+        alert(error.response.data.message)
       } else {
         alert(`Error adding ${props.resource}, please try again later`)
       }

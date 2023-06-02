@@ -17,6 +17,7 @@ import Loading from './Loading';
 import Student from '../components/Student';
 import { BlurView } from 'expo-blur';
 import AddModal from '../components/AddModal';
+import { catchTokenExpiredError } from '../utils/utils';
 
 type StudentsProps = NativeStackScreenProps<RootStackParamList, 'Students'>;
 
@@ -30,7 +31,7 @@ type StudentsState = {
 }
 
 export default function Students({ route, navigation }: StudentsProps) {
-  const { authState } = useAuth()
+  const { authState, onLogout } = useAuth()
 
   const [students, setStudents] = React.useState<StudentsState>({
     students: [],
@@ -70,6 +71,7 @@ export default function Students({ route, navigation }: StudentsProps) {
         }
       })
     } catch (err: any) {
+      catchTokenExpiredError(err, onLogout)
       alert('Error getting students, please try again later')
       setStudents((prevState) => {
         return {
