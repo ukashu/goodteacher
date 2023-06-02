@@ -10,10 +10,12 @@ type Props = {
 export default function ClassBackgroundSvg(props: SvgProps & Props) {
   const [faceRotation, setFaceRotation] = React.useState(0)
   const [innerX, setInnerX] = React.useState(0)
+  const [mouthOpen, setMouthOpen] = React.useState(0)
 
   React.useEffect(() => {
     setFaceRotation(getRandomInt(-20, 20))
     setInnerX(getRandomInt(140, 260))
+    setMouthOpen(getRandomInt(0, 10))
   }, [])
 
   //circle inner cx in range 140-260 , cy same always
@@ -62,7 +64,7 @@ export default function ClassBackgroundSvg(props: SvgProps & Props) {
           <G>
             <Circle cx="150" cy="200" r="10" fill="black"/>
             <Circle cx="210" cy="200" r="10" fill="black"/>
-            <Path d="M140 240 Q180 280 220 240" stroke="black" strokeWidth="10" strokeLinecap="round"/>
+            <Path d="M140 240 Q180 280 220 240" stroke="black" strokeWidth="10" fill={mouthOpen === 5 ? 'black' : 'none'} strokeLinecap={mouthOpen === 5 ? 'butt' : 'round'}/>
           </G>
         </G>
       </Defs>
