@@ -76,7 +76,6 @@ export default function Student(props : StudentProps) {
         <TouchableOpacity onPress={props.goToTasks} onLongPress={() => {createTwoButtonDeleteAlert()}} style={tw` w-100% rounded-full h-100% flex-row p-3 justify-between`}>
           <View style={tw` ml-10`}>
             <Text style={tw`text-xl text-white`}>{props.studentAlias}</Text>
-            <Text style={tw` text-base text-white`}>{`student id:`}</Text>
           </View>
           <View style={tw`bg-white rounded-full h-100% aspect-square`}>
             <StudentAvatarSvg studentAlias={props.studentAlias}/>

@@ -40,3 +40,7 @@ TODOS:
   - class onPress sometimes doesnt work, happened after adding dyamic background (its probably because the svgt element overflows its container) DONE
   - think of edge cases in student avatar generation
   - white letters in addModal
+  - avatars end up on right side most on the time
+  - remove class avatar
+  - add student avatar to task screen maybe
+  - caching for offline data access maybe
