@@ -1,6 +1,7 @@
 import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import tw from '../../lib/tailwind';
 import { useAuth } from '../context/AuthContext';
@@ -59,12 +60,28 @@ export default function Classes({ navigation }: Props) {
 
   //useEffect getclasses once
   React.useEffect(() => {
+    getClassesFromStorage()
     getClasses()
   }, [])
+
+  const getClassesFromStorage = async() => {
+    try {
+      const stored = await AsyncStorage.getItem(`${API_URL}/classes`)
+      setClasses((prevState) => {
+        return {
+          ...prevState,
+          classes: stored ? JSON.parse(stored as string) : [],
+        }
+      })
+    } catch(err) {
+      
+    }
+  }
 
   const getClasses = async () => {
     try {
       const res = await axios.get(`${API_URL}/classes`)
+      await AsyncStorage.setItem(`${API_URL}/classes`, JSON.stringify(res.data.myClasses))
       setClasses((prevState) => {
         return {
           ...prevState,

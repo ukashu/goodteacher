@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios'
 import * as SecureStore from 'expo-secure-store'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import z from 'zod'
 import * as schema from '../utils/schemas'
 
@@ -108,7 +109,17 @@ export const AuthProvider = ({ children }: any) => {
   }
 
   const logout = async () => {
+    const removeAppKeys = async () => {
+      try {
+        const keys = await AsyncStorage.getAllKeys()
+        await AsyncStorage.multiRemove(keys)
+      } catch(e) {
+       console.log(e)
+      }
+    }
+
     await SecureStore.deleteItemAsync(AUTH_KEY)
+    removeAppKeys()
 
     axios.defaults.headers.common['Authorization'] = ''
 

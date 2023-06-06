@@ -1,10 +1,10 @@
 import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import tw from '../../lib/tailwind';
 import { StackActions } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
 import Background from '../../assets/background.svg';
@@ -54,12 +54,28 @@ export default function Students({ route, navigation }: StudentsProps) {
 
   //use effect get students
   React.useEffect(() => {
+    getStudentsFromStorage()
     getStudents()
   }, [])
+
+  const getStudentsFromStorage = async() => {
+    try {
+      const stored = await AsyncStorage.getItem(`${API_URL}/classes/${route.params.classId}/students`)
+      setStudents((prevState) => {
+        return {
+          ...prevState,
+          students: stored ? JSON.parse(stored as string) : [],
+        }
+      })
+    } catch(err) {
+      
+    }
+  }
 
   const getStudents = async () => {
     try {
       const res = await axios.get(`${API_URL}/classes/${route.params.classId}/students`)
+      await AsyncStorage.setItem(`${API_URL}/classes/${route.params.classId}/students`, JSON.stringify(res.data.studentsInClass))
       setStudents((prevState) => {
         return {
           ...prevState,

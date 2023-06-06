@@ -1,10 +1,10 @@
 import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import tw from '../../lib/tailwind';
 import { StackActions } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
 import Background from '../../assets/background.svg';
@@ -55,12 +55,28 @@ export default function Tasks({ route, navigation }: TasksProps) {
 
   //use effect get tasks
   React.useEffect(() => {
+    getTasksFromStorage()
     getTasks()
   }, [])
+
+  const getTasksFromStorage = async() => {
+    try {
+      const stored = await AsyncStorage.getItem(`${API_URL}/classes/${route.params.classId}/students/${route.params.studentId}/tasks`)
+      setTasks((prevState) => {
+        return {
+          ...prevState,
+          tasks: stored ? JSON.parse(stored as string) : [],
+        }
+      })
+    } catch(err) {
+      
+    }
+  }
 
   const getTasks = async () => {
     try {
       const res = await axios.get(`${API_URL}/classes/${route.params.classId}/students/${route.params.studentId}/tasks`)
+      await AsyncStorage.setItem(`${API_URL}/classes/${route.params.classId}/students/${route.params.studentId}/tasks`, JSON.stringify(res.data.tasks))
       setTasks((prevState) => {
         return {
           ...prevState,
