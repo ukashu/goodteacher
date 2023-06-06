@@ -45,3 +45,6 @@ TODOS:
   - add student avatar to task screen maybe
   - caching for offline data access maybe
   - add graphics for student side classes
+  - check out react query for offline access or implement your own persistent offline caching POC DONE
+  - appwide offline cache
+  - delete cache on logout
