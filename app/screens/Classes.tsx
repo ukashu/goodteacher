@@ -17,6 +17,8 @@ import Loading from './Loading';
 import { BlurView } from 'expo-blur';
 import AddModal from '../components/AddModal';
 import { catchTokenExpiredError } from '../utils/utils';
+import DrawerModal from '../components/DrawerModal';
+import { Entypo } from '@expo/vector-icons';
 
 type ClassesNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -49,6 +51,7 @@ export default function Classes({ navigation }: Props) {
   })
 
   const [showModal, setShowModal] = React.useState<boolean>(false)
+  const [showDrawerModal, setShowDrawerModal] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     if (showModal) {
@@ -184,8 +187,10 @@ export default function Classes({ navigation }: Props) {
         <View>
           <Background width="100%" height="110%" preserveAspectRatio="none" style={tw`absolute z-1`}/>
           <SafeAreaView style={tw`z-2 items-center h-100% w-100%`}>
-            <View style={tw` w-100% px-2 flex-row justify-end items-center`}>
-              <CustomButton onPress={onLogout} title="Log out" style={tw`px-4 py-2 flex-grow-0 mt-2 mr-2 rounded-lg bg-custom-blue-dark`}/>
+            <View style={tw` w-100% px-2 flex-row justify-between items-center`}>
+              <TouchableOpacity onPress={() => setShowDrawerModal(true)} style={tw` ml-auto`}>
+                <Entypo name="menu" size={40} color="#2563eb"/>
+              </TouchableOpacity>
             </View>
             <Text style={tw` text-4xl text-blue-600 mt-3 mb-5`}>Your <Text style={tw` font-bold`}>classes</Text></Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} colors={["#3083ff"]}/>}>
@@ -215,6 +220,9 @@ export default function Classes({ navigation }: Props) {
                 <AddModal resource="class" title="Add new class" shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/>
                 </Animated.View>
               </BlurView>
+            : <></>}
+            {showDrawerModal
+            ? <DrawerModal name="ukashu" hideDrawerModal={() => setShowDrawerModal(false)} logout={onLogout}/>
             : <></>}
           </SafeAreaView>
         </View>
