@@ -6,7 +6,7 @@ import z from 'zod'
 import * as schema from '../utils/schemas'
 
 export interface AuthContextProps {
-  authState?: { token: string | null, authenticated: boolean | null, accountType: string | null, userId: string | null };
+  authState?: { token: string | null, authenticated: boolean | null, accountType: string | null, userId: string | null, email: string | null, name: string | null };
   onRegister?: ({}: schema.RegisterUserInput) => Promise<any>;
   onLogin?: ({}: schema.LoginUserInput) => Promise<any>;
   onLogout?: () => Promise<any>;
@@ -33,11 +33,15 @@ export const AuthProvider = ({ children }: any) => {
     token: string | null,
     accountType: string | null,
     userId: string | null,
+    email: string | null,
+    name: string | null,
     authenticated: boolean
   }>({
     token: null,
     accountType: null,
     userId: null,
+    email: null,
+    name: null,
     authenticated: false
   })
 
@@ -54,6 +58,8 @@ export const AuthProvider = ({ children }: any) => {
           token: token.token,
           accountType: token.accountType,
           userId: token.userId,
+          email: token.email,
+          name: token.name,
           authenticated: true
         })
       }
@@ -87,6 +93,8 @@ export const AuthProvider = ({ children }: any) => {
         token: result.data.token,
         accountType: result.data.accountType,
         userId: result.data.id,
+        email: result.data.email,
+        name: result.data.name,
         authenticated: true
       })
 
@@ -127,6 +135,8 @@ export const AuthProvider = ({ children }: any) => {
       token: null,
       accountType: null,
       userId: null,
+      email: null,
+      name: null,
       authenticated: false
     })
   }

@@ -51,3 +51,6 @@ TODOS:
   - add class background for student
   - maybe move top navigation and burger menu out from page components
   - remove cancel pressed console.log
+  - side drawer add dynamic name DONE
+  - description firld resize
+  - add modal width less 

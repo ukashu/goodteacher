@@ -222,7 +222,7 @@ export default function Classes({ navigation }: Props) {
               </BlurView>
             : <></>}
             {showDrawerModal
-            ? <DrawerModal name="ukashu" hideDrawerModal={() => setShowDrawerModal(false)} logout={onLogout}/>
+            ? <DrawerModal name={String(authState?.name)} hideDrawerModal={() => setShowDrawerModal(false)} logout={onLogout}/>
             : <></>}
           </SafeAreaView>
         </View>
