@@ -16,7 +16,7 @@ export default function DrawerBackgroundSvg(props: SvgProps & Props) {
           <Stop offset="1" stopColor="#99D4FF" stopOpacity="1" />
         </LinearGradient>
       </Defs>
-      <Rect x="-200" y="-400" width="400" height="800" fill="url(#grad)" rx="8"></Rect>
+      <Rect x="-200" y="-400" width="400" height="800" fill="url(#grad)"></Rect>
     </Svg>
   )
 }
