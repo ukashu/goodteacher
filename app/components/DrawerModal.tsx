@@ -43,7 +43,7 @@ export default function DrawerModal(props: Props) {
     <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}>
       <Animated.View style={{width: "100%", height: "100%", marginLeft: slideAnim}}>
       <View style={tw` h-100% w-80% self-end ml-50 mt-8 bg-custom-blue-dark gap-2 rounded-l-xl shadow-xl`}>
-        <DrawerBackgroundSvg width="100%" height="100%" preserveAspectRatio='none' style={tw`absolute block z-0`}/>
+        <DrawerBackgroundSvg width="100%" height="100%" preserveAspectRatio='none' style={tw`absolute z-0`}/>
         <View style={tw`w-100% h-20 flex-row items-center p-2 my-2`}>
           <View style={tw` h-100% w-20 aspect-square`}>
             <StudentAvatarSvg studentAlias={props.name}/>
