@@ -40,7 +40,7 @@ export default function Login({ navigation }: Props) {
     }}>
       <Background width="100%" height="110%" preserveAspectRatio="none" style={tw`absolute z-1`}/>
       <View style={tw`z-2 items-center justify-between m-auto h-100% w-100%`}>
-        <Logo width={Dimensions.get('window').width + 2} height={296} />
+        <Logo width={Dimensions.get('window').width + 2} height={Math.floor(Dimensions.get('window').height/3)} />
         <View style={tw`w-100% h-50% items-center justify-around px-10`}>
           <View style={tw`w-100% h-75% justify-around items-center`}>
             <CustomInput placeholder="email" onChangeText={(text: string) => setEmail(text)} value={email} autoCapitalize='none'/>
