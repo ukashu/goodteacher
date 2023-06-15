@@ -1,6 +1,23 @@
 {
+  "login": {
+    "email": "email",
+    "password": "hasło",
+    "Sign in": "Zaloguj",
+    "Sign up": "Rejestracja",
+    "Don't have an account?": "Nie masz konta?"
+  },
+  "register": {
+    "name": "imię",
+    "email": "email",
+    "password": "hasło",
+    "confirm password": "potwierdź hasło",
+    "Click to create a teacher account": "Zaznacz, aby utworzyć konto nauczycielskie",
+    "Register": "Zarejestruj",
+    "Sign in": "Logowanie",
+    "Have an account already?": "Masz już konto?"
+  },
   "classes": {
-    "Welcome to React": "Wiraj w React i react-i18next",
+    "Welcome to React": "Witaj w React i react-i18next",
     "Your": "Twoje",
     "classes": "klasy",
     "New class": "Nowa klasa",

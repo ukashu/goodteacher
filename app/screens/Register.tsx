@@ -9,6 +9,7 @@ import Logo from '../../assets/logo.svg';
 import Background from '../../assets/background.svg';
 import CustomInput from '../components/CustomInput'
 import Checkbox from '../components/Checkbox';
+import { useTranslation } from "react-i18next";
 
 type RegisterScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -26,6 +27,7 @@ export default function Register({ navigation }: Props) {
   const [passwordConfirmation, setPasswordConfirmation] = React.useState('')
   const [isTeacher, setIsTeacher] = React.useState(false)
   const { onRegister } = useAuth()
+  const { t } = useTranslation();
 
   const register = async () => {
     const result = await onRegister!({name, email, password, passwordConfirmation, type: isTeacher?'TEACHER':'STUDENT'})
@@ -52,21 +54,21 @@ export default function Register({ navigation }: Props) {
         <Logo width={Dimensions.get('window').width + 2} height={Math.floor(Dimensions.get('window').height/3)} />
         <View style={tw`w-100% h-60% items-center justify-around px-10`}>
           <View style={tw`w-100% h-75% justify-around items-center`}>
-            <CustomInput placeholder="name" onChangeText={(text: string) => setName(text)} value={name} autoCapitalize='none'/>
-            <CustomInput placeholder="email" onChangeText={(text: string) => setEmail(text)} value={email} autoCapitalize='none'/>
-            <CustomInput placeholder="password" secureTextEntry={false} onChangeText={(password: string) => setPassword(password)} value={password} autoCapitalize='none'/>
-            <CustomInput placeholder="confirm password" secureTextEntry={false} onChangeText={(password: string) => setPasswordConfirmation(password)} value={passwordConfirmation} autoCapitalize='none'/>
+            <CustomInput placeholder={t("register.name")} onChangeText={(text: string) => setName(text)} value={name} autoCapitalize='none'/>
+            <CustomInput placeholder={t("register.email")} onChangeText={(text: string) => setEmail(text)} value={email} autoCapitalize='none'/>
+            <CustomInput placeholder={t("register.password")} secureTextEntry={false} onChangeText={(password: string) => setPassword(password)} value={password} autoCapitalize='none'/>
+            <CustomInput placeholder={t("register.confirm password")} secureTextEntry={false} onChangeText={(password: string) => setPasswordConfirmation(password)} value={passwordConfirmation} autoCapitalize='none'/>
             <View style={tw`w-100% flex-row justify-between items-center`}>
               <View style={tw`flex-row justify-between items-center`}>
                 <Checkbox state={isTeacher} onPress={() => setIsTeacher(prevState=>!prevState)}/>
-                <Text style={tw`text-white text-xs ml-3`} >{"Click to create a teacher account"}</Text>
+                <Text style={tw`text-white text-xs ml-3`} >{t("register.Click to create a teacher account")}</Text>
               </View>
-              <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500`} onPress={register}><Text style={tw`text-white text-center`}>Register</Text></TouchableOpacity>
+              <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500`} onPress={register}><Text style={tw`text-white text-center`}>{t("register.Register")}</Text></TouchableOpacity>
             </View>
           </View>
           <View style={tw`w-100% flex-row justify-between items-center`}>
-            <Text style={tw`text-white`} >{"Have an account already? "}</Text>
-            <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500 self-end`} onPress={() => navigation.navigate('Login')}><Text style={tw`text-white text-center`}>Sign in</Text></TouchableOpacity>
+            <Text style={tw`text-white`} >{t("register.Have an account already?")}</Text>
+            <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500 self-end`} onPress={() => navigation.navigate('Login')}><Text style={tw`text-white text-center`}>{t("register.Sign in")}</Text></TouchableOpacity>
           </View>
         </View>
       </View>

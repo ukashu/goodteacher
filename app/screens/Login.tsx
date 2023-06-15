@@ -8,6 +8,7 @@ import tw from 'twrnc';
 import Logo from '../../assets/logo.svg';
 import Background from '../../assets/background.svg';
 import CustomInput from '../components/CustomInput'
+import { useTranslation } from "react-i18next";
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -22,6 +23,7 @@ export default function Login({ navigation }: Props) {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const { onLogin } = useAuth()
+  const { t } = useTranslation();
 
   const login = async () => {
     const result = await onLogin!({email, password})
@@ -43,16 +45,16 @@ export default function Login({ navigation }: Props) {
         <Logo width={Dimensions.get('window').width + 2} height={Math.floor(Dimensions.get('window').height/3)} />
         <View style={tw`w-100% h-50% items-center justify-around px-10`}>
           <View style={tw`w-100% h-75% justify-around items-center`}>
-            <CustomInput placeholder="email" onChangeText={(text: string) => setEmail(text)} value={email} autoCapitalize='none'/>
-            <CustomInput placeholder="password" secureTextEntry={false} onChangeText={(password: string) => setPassword(password)} value={password} autoCapitalize='none'/>
+            <CustomInput placeholder={t("login.email")} onChangeText={(text: string) => setEmail(text)} value={email} autoCapitalize='none'/>
+            <CustomInput placeholder={t("login.password")} secureTextEntry={false} onChangeText={(password: string) => setPassword(password)} value={password} autoCapitalize='none'/>
             <View style={tw`w-100% flex-row justify-between`}>
               <Text></Text>
-              <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500`} onPress={login}><Text style={tw`text-white text-center`}>Sign in</Text></TouchableOpacity>
+              <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500`} onPress={login}><Text style={tw`text-white text-center`}>{t("login.Sign in")}</Text></TouchableOpacity>
             </View>
           </View>
           <View style={tw`w-100% flex-row justify-between items-center`}>
-              <Text style={tw`text-white`} >{"Don't have an account? "}</Text>
-              <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500 self-end`} onPress={() => navigation.navigate('Register')}><Text style={tw`text-white text-center`}>Sign up</Text></TouchableOpacity>
+              <Text style={tw`text-white`} >{t("login.Don't have an account?")}</Text>
+              <TouchableOpacity style={tw`px-4 py-2 rounded-lg min-w-23 bg-blue-500 self-end`} onPress={() => navigation.navigate('Register')}><Text style={tw`text-white text-center`}>{t("login.Sign up")}</Text></TouchableOpacity>
             </View>
         </View>
       </View>

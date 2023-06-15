@@ -1,4 +1,21 @@
 {
+  "login": {
+    "email": "email",
+    "password": "password",
+    "Sign in": "Sign in",
+    "Sign up": "Sign up",
+    "Don't have an account?": "Don't have an account?"
+  },
+  "register": {
+    "name": "name",
+    "email": "email",
+    "password": "password",
+    "confirm password": "confirm password",
+    "Click to create a teacher account": "Click to create a teacher account",
+    "Register": "Register",
+    "Sign in": "Sign in",
+    "Have an account already?": "Have an account already?"
+  },
   "classes": {
     "Welcome to React": "Welcome to React and react-i18next",
     "Your": "Your",
