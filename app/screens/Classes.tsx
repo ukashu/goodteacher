@@ -19,6 +19,7 @@ import AddModal from '../components/AddModal';
 import { catchTokenExpiredError } from '../utils/utils';
 import DrawerModal from '../components/DrawerModal';
 import { Entypo } from '@expo/vector-icons';
+import { useTranslation } from "react-i18next";
 
 type ClassesNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -40,6 +41,7 @@ type ClassesState = {
 
 export default function Classes({ navigation }: Props) {
   const { authState, onLogout } = useAuth()
+  const { t } = useTranslation();
 
   const [classes, setClasses] = React.useState<ClassesState>({
     classes: [],
@@ -192,7 +194,8 @@ export default function Classes({ navigation }: Props) {
                 <Entypo name="menu" size={40} color="#2563eb"/>
               </TouchableOpacity>
             </View>
-            <Text style={tw` text-4xl text-blue-600 mt-3 mb-5`}>Your <Text style={tw` font-bold`}>classes</Text></Text>
+            <Text style={tw` text-4xl text-blue-600 mt-3 mb-5`}>{t('classes.Your')}<Text style={tw` font-bold`}> {t('classes.classes')}</Text></Text>
+            <Text style={tw` text-4xl text-blue-600 mt-3 mb-5`}>{t('classes.Welcome to React')}</Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} colors={["#3083ff"]}/>}>
               {classes.classes.map((item) => { 
                 if (authState?.accountType === 'TEACHER') {
@@ -203,7 +206,7 @@ export default function Classes({ navigation }: Props) {
               })}
             </ScrollView>
             <View style={tw` absolute bottom-0 right-0 m-10`}>
-              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New class" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-custom-red-light`}/>
+              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title={t("classes.New class")} style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-custom-red-light`}/>
             </View>
             {showModal
             ? 
@@ -217,7 +220,7 @@ export default function Classes({ navigation }: Props) {
                     height: '100%',
                     opacity: fadeAnim,
                   }}>
-                <AddModal resource="class" title="Add new class" shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/>
+                <AddModal resource="class" name={t('classes.resource')} title={t("classes.Add new class")} shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/>
                 </Animated.View>
               </BlurView>
             : <></>}

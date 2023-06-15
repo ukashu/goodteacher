@@ -14,6 +14,7 @@ import AddModalBackgroundSvg from './svg/AddModalBackgroundSvg'
 type AddModalProps = {
   title: string,
   resource: "class" | "student" | "task",
+  name: string,
   shortInputs: Array<string>,
   requestRoute: string,
   forceRerender: () => void,
@@ -78,7 +79,7 @@ export default function AddModal(props: AddModalProps) {
               {props.shortInputs.map((item) => { return (<CustomInput onChangeText={(input: string) => handleInputChange(input, item)} placeholder={item} key={item} style={tw`mt-5`} autoCapitalize='none'/>)})}
             </View>
             <View style={tw` `}>
-              <CustomButton title={`Add ${props.resource}`} onPress={createResource} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-custom-blue-dark`}/>
+              <CustomButton title={`Add ${props.name}`} onPress={createResource} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-custom-blue-dark`}/>
             </View>
           </View> 
         </View>
