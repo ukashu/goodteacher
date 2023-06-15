@@ -44,5 +44,10 @@
     "alias": "alias",
     "title": "tytuł",
     "description": "opis"
+  },
+  "studentClass": {
+    "Invite to class": "Zaproszenie do klasy",
+    "Join Class": "Dołącz",
+    "Leave Class": "Odrzuć"
   }
 }

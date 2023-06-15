@@ -55,4 +55,7 @@ TODOS:
   - description firld resize
   - add modal width less 
   - tasks get reordered sometimes
-  - addmodal gradient background
+  - addmodal gradient background DONE
+  - add translation to errors
+  - fetch class name in studentClass component
+  - refresh tasks doesnt render task done change

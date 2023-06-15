@@ -44,5 +44,10 @@
     "alias": "alias",
     "title": "title",
     "description": "description"
+  },
+  "studentClass": {
+    "Invite to class": "Invite to class",
+    "Join Class": "Join class",
+    "Leave Class": "Leave class"
   }
 }
