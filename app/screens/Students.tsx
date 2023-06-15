@@ -18,6 +18,7 @@ import Student from '../components/Student';
 import { BlurView } from 'expo-blur';
 import AddModal from '../components/AddModal';
 import { catchTokenExpiredError } from '../utils/utils';
+import { useTranslation } from "react-i18next";
 
 type StudentsProps = NativeStackScreenProps<RootStackParamList, 'Students'>;
 
@@ -32,6 +33,7 @@ type StudentsState = {
 
 export default function Students({ route, navigation }: StudentsProps) {
   const { authState, onLogout } = useAuth()
+  const { t } = useTranslation();
 
   const [students, setStudents] = React.useState<StudentsState>({
     students: [],
@@ -165,13 +167,13 @@ export default function Students({ route, navigation }: StudentsProps) {
                 <Entypo name="chevron-left" size={40} color="#ff0000"/>
               </TouchableOpacity>
             </View>
-            <Text style={tw` text-4xl text-blue-600 mt-5`}>Your <Text style={tw` font-bold`}>students</Text></Text>
+            <Text style={tw` text-4xl text-blue-600 mt-5`}>{t("students.Your")} <Text style={tw` font-bold`}>{t("students.students")}</Text></Text>
             <Text style={tw` text-2xl text-blue-600 mb-5`}>{route.params.className}</Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={students.isRefreshing} onRefresh={onRefresh} colors={["blue"]}/>}>
               {students.students.map((item) => <Student studentId={item.user_id} classId={route.params.classId} studentAlias={item.user_alias} joinedStatus={item.joined} deleteSelf={removeStudentFromState} key={item.user_id} goToTasks={() => navigation.navigate('Tasks', { classId: route.params.classId, className: route.params.className, studentId: item.user_id, studentAlias: item.user_alias })}/>)}
             </ScrollView>
             <View style={tw` absolute bottom-0 right-0 m-10`}>
-              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="Add student" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-custom-red-light `}/>
+              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title={t("students.Add student")} style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-custom-red-light `}/>
             </View>
             {showModal
             ? 
@@ -185,7 +187,7 @@ export default function Students({ route, navigation }: StudentsProps) {
                   height: '100%',
                   opacity: fadeAnim,
                 }}>
-                <AddModal resource="student" title="Add new student" shortInputs={["email", "alias"]} requestRoute={`/classes/${route.params.classId}/students`} forceRerender={getStudents} setShowModal={() => setShowModal(prevState => !prevState)}/>
+                <AddModal resource="student" name={t("students.resource")} title={t("students.Add new student")} shortInputs={["email", "alias"]} requestRoute={`/classes/${route.params.classId}/students`} forceRerender={getStudents} setShowModal={() => setShowModal(prevState => !prevState)}/>
               </Animated.View>
             </BlurView>
             : <></>}

@@ -17,11 +17,24 @@
     "Have an account already?": "Have an account already?"
   },
   "classes": {
-    "Welcome to React": "Welcome to React and react-i18next",
     "Your": "Your",
     "classes": "classes",
     "New class": "New class",
     "resource": "class",
     "Add new class": "Add new class"
+  },
+  "students": {
+    "Your": "Your",
+    "students": "students",
+    "Add student": "Add student",
+    "resource": "student",
+    "Add new student": "Add new student"
+  },
+  "tasks": {
+    "Your": "Your",
+    "tasks": "tasks",
+    "New task": "New task",
+    "resource": "task",
+    "Add new task": "Add new task"
   }
 }

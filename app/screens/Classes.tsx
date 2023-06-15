@@ -195,7 +195,6 @@ export default function Classes({ navigation }: Props) {
               </TouchableOpacity>
             </View>
             <Text style={tw` text-4xl text-blue-600 mt-3 mb-5`}>{t('classes.Your')}<Text style={tw` font-bold`}> {t('classes.classes')}</Text></Text>
-            <Text style={tw` text-4xl text-blue-600 mt-3 mb-5`}>{t('classes.Welcome to React')}</Text>
             <ScrollView style={tw` w-100% `} refreshControl={<RefreshControl refreshing={classes.isRefreshing} onRefresh={onRefresh} colors={["#3083ff"]}/>}>
               {classes.classes.map((item) => { 
                 if (authState?.accountType === 'TEACHER') {

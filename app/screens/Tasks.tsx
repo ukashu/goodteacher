@@ -18,6 +18,7 @@ import { BlurView } from 'expo-blur';
 import AddModal from '../components/AddModal';
 import Task from '../components/Task';
 import { catchTokenExpiredError } from '../utils/utils';
+import { useTranslation } from "react-i18next";
 
 
 type TasksProps = NativeStackScreenProps<RootStackParamList, 'Tasks'>;
@@ -33,6 +34,7 @@ type TasksState = {
 
 export default function Tasks({ route, navigation }: TasksProps) {
   const { authState, onLogout } = useAuth()
+  const { t } = useTranslation();
 
   const [tasks, setTasks] = React.useState<TasksState>({
     tasks: [],
@@ -161,14 +163,14 @@ export default function Tasks({ route, navigation }: TasksProps) {
             <View style={tw` w-100% px-2 flex-row justify-between items-center`}>
               <TouchableOpacity onPress={() => navigation.dispatch(StackActions.pop(1))}><Entypo name="chevron-left" size={40} color="#ff0000"/></TouchableOpacity>
             </View>
-            <Text style={tw` text-4xl text-blue-600 mt-3`}>Your <Text style={tw` font-bold`}>tasks</Text></Text>
+            <Text style={tw` text-4xl text-blue-600 mt-3`}>{t("tasks.Your")} <Text style={tw` font-bold`}>{t("tasks.tasks")}</Text></Text>
             <Text style={tw` text-3xl text-blue-600`}>{route.params.studentAlias}</Text>
             <Text style={tw` text-base text-blue-600 mb-5`}>{route.params.className}</Text>
             <ScrollView style={tw` w-100% px-2`} refreshControl={<RefreshControl refreshing={tasks.isRefreshing} onRefresh={onRefresh} colors={["blue"]}/>}>
               {tasks.tasks.map((item) => <Task title={item.title} description={item.description ? item.description : undefined} completed={item.completed} deleteSelf={removeTaskFromState} id={item.id} classId={route.params.classId} studentId={route.params.studentId} key={item.id}/>)}
             </ScrollView>
             <View style={tw` absolute bottom-0 right-0 m-10`}>
-              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title="New task" style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-custom-red-light`}/>
+              <CustomButton onPress={() => setShowModal(prevState => !prevState)} title={t("tasks.New task")} style={tw`px-4 py-2 flex-grow-0 rounded-lg bg-custom-red-light`}/>
             </View>
             {showModal
             ? 
@@ -182,7 +184,7 @@ export default function Tasks({ route, navigation }: TasksProps) {
               opacity: fadeAnim,
             }}>
               <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}>
-                <AddModal resource="task" title="Add new task" shortInputs={["title", "description"]} requestRoute={`/classes/${route.params.classId}/students/${route.params.studentId}/tasks`} forceRerender={getTasks} setShowModal={() => setShowModal(prevState => !prevState)}/>
+                <AddModal resource="task" name={t("tasks.resource")} title={t("tasks.Add new task")} shortInputs={["title", "description"]} requestRoute={`/classes/${route.params.classId}/students/${route.params.studentId}/tasks`} forceRerender={getTasks} setShowModal={() => setShowModal(prevState => !prevState)}/>
               </BlurView>
             </Animated.View>
             : <></>}
