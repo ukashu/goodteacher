@@ -54,3 +54,5 @@ TODOS:
   - side drawer add dynamic name DONE
   - description firld resize
   - add modal width less 
+  - tasks get reordered sometimes
+  - addmodal gradient background
