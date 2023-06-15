@@ -7,6 +7,7 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import CustomButton from './CustomButton';
 import DrawerBackgroundSvg from './svg/DrawerBackgroundSvg'
+import { useTranslation } from "react-i18next";
 
 type Props = {
   name: string,
@@ -15,6 +16,8 @@ type Props = {
 }
 
 export default function DrawerModal(props: Props) {
+  const { t } = useTranslation();
+
   React.useEffect(() => {
     slideIn()
   }, [])
@@ -57,19 +60,19 @@ export default function DrawerModal(props: Props) {
           <View style={tw` h-100% w-20 items-center justify-center`}>
             <Entypo name="bug" size={30} color="#99D4FF"/>
           </View>
-          <Text style={tw` text-base text-custom-blue-light`}>Report bug</Text>
+          <Text style={tw` text-base text-custom-blue-light`}>{t("drawerModal.Report bug")}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={tw` w-100% h-20 py-1 flex-row items-center px-2`}>
           <View style={tw` h-100% w-20 items-center justify-center`}>
             <MaterialIcons name="visibility" size={30} color="#99D4FF"/>
           </View>
-          <Text style={tw` text-base text-custom-blue-light`}>Visible to invites</Text>
+          <Text style={tw` text-base text-custom-blue-light`}>{t("drawerModal.Visible to invites")}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={props.logout} style={tw` w-100% h-20 py-1 flex-row items-center px-2`}>
           <View style={tw` h-100% w-20 items-center justify-center`}>
             <Entypo name="log-out" size={30} color="#99D4FF"/>
           </View>
-          <Text style={tw` text-base text-custom-blue-light`}>Log out</Text>
+          <Text style={tw` text-base text-custom-blue-light`}>{t("drawerModal.Log out")}</Text>
         </TouchableOpacity>
       </View>
       </Animated.View>

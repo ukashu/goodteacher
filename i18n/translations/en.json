@@ -49,5 +49,10 @@
     "Invite to class": "Invite to class",
     "Join Class": "Join class",
     "Leave Class": "Leave class"
+  },
+  "drawerModal": {
+    "Report bug": "Report bug",
+    "Visible to invites": "Visible to invites",
+    "Log out": "Log out"
   }
 }

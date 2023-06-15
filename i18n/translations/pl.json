@@ -49,5 +49,10 @@
     "Invite to class": "Zaproszenie do klasy",
     "Join Class": "Dołącz",
     "Leave Class": "Odrzuć"
+  },
+  "drawerModal": {
+    "Report bug": "Zgłoś błąd",
+    "Visible to invites": "Widoczny do zaproszeń",
+    "Log out": "Wyloguj"
   }
 }
