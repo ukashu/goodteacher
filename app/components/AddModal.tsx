@@ -10,6 +10,7 @@ import axios from 'axios'
 import z from 'zod'
 import * as schema from '../utils/schemas'
 import AddModalBackgroundSvg from './svg/AddModalBackgroundSvg'
+import { useTranslation } from "react-i18next";
 
 type AddModalProps = {
   title: string,
@@ -26,6 +27,8 @@ interface LooseObject {
 }
 
 export default function AddModal(props: AddModalProps) {
+  const { t } = useTranslation();
+
   const [inputs, setInputs] = React.useState<LooseObject>(() => {
     let temp: LooseObject = {}
     props.shortInputs.forEach((item) => {
@@ -76,10 +79,10 @@ export default function AddModal(props: AddModalProps) {
               <ClassAvatar/>
             </View>
             <View style={tw` mx-5 mb-5`}>
-              {props.shortInputs.map((item) => { return (<CustomInput onChangeText={(input: string) => handleInputChange(input, item)} placeholder={item} key={item} style={tw`mt-5`} autoCapitalize='none'/>)})}
+              {props.shortInputs.map((item) => { return (<CustomInput onChangeText={(input: string) => handleInputChange(input, item)} placeholder={t(`addModal.${item}` as any) as any} key={item} style={tw`mt-5`} autoCapitalize='none'/>)})}
             </View>
             <View style={tw` `}>
-              <CustomButton title={`Add ${props.name}`} onPress={createResource} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-custom-blue-dark`}/>
+              <CustomButton title={`${t("addModal.Add")} ${props.name}`} onPress={createResource} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-custom-blue-dark`}/>
             </View>
           </View> 
         </View>

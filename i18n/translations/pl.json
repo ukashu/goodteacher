@@ -36,5 +36,13 @@
     "New task": "Dodaj zadanie",
     "resource": "zadanie",
     "Add new task": "Dodaj zadanie"
+  },
+  "addModal": {
+    "Add": "Dodaj",
+    "name": "nazwa",
+    "email": "email",
+    "alias": "alias",
+    "title": "tytuł",
+    "description": "opis"
   }
 }

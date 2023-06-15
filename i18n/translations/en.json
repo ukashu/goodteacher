@@ -36,5 +36,13 @@
     "New task": "New task",
     "resource": "task",
     "Add new task": "Add new task"
+  },
+  "addModal": {
+    "Add": "Add",
+    "name": "name",
+    "email": "email",
+    "alias": "alias",
+    "title": "title",
+    "description": "description"
   }
 }
