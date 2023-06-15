@@ -1,0 +1,10 @@
+{
+  "classes": {
+    "Welcome to React": "Welcome to React and react-i18next",
+    "Your": "Your",
+    "classes": "classes",
+    "New class": "New class",
+    "resource": "class",
+    "Add new class": "Add new class"
+  }
+}

@@ -7,6 +7,7 @@ import Register from './app/screens/Register';
 import Classes from './app/screens/Classes';
 import Students from './app/screens/Students';
 import Tasks from './app/screens/Tasks'
+import './i18n/config';
 
 export type RootStackParamList = {
   Home: undefined,
