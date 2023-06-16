@@ -54,5 +54,24 @@
     "Report bug": "Zgłoś błąd",
     "Visible to invites": "Widoczny do zaproszeń",
     "Log out": "Wyloguj"
+  },
+  "zodErrors": {
+    "Name is required": "Nazwa jest wymagana",
+    "Name must be at least 1 character long": "Nazwa musi mieć co najmniej jeden znak",
+    "Name must be less than 20 characters long": "Nazwa musi być krótsza niż 20 znaków",
+    "Name must be less than 25 characters long": "Nazwa musi być krótsza niż 25 znaków",
+    "Not a valid email": "Błędny email",
+    "Alias must be at least 1 character long": "Alias musi mieć co najmniej jeden znak",
+    "Alias must be less than 25 characters long": "Alias musi być krótszy niż 25 znaków",
+    "Title must be at least 1 character long": "Tytuł musi mieć co najmniej jeden znak",
+    "Title must be less than 25 characters long": "Tytuł musi być krótszy niż 25 znaków",
+    "Description must be at least 1 character long": "Opis musi mieć co najmniej jeden znak",
+    "Description must be less than 140 characters long": "Opis musi być krótszy niż 140 znaków",
+    "Email is required": "Email jest wymagany",
+    "Password is required": "Hasło jest wymagane",
+    "Password must be at least 6 characters long": "Hasło musi miec co najmniej 6 znaków",
+    "Password must be less than 100 characters long": "Hasło musi być krótsze niż 100 znaków",
+    "Password confirmation is required": "Potwierdzenie hasła jest wymagane",
+    "Passwords do not match": "Hasła nie są zgodne ze sobą"
   }
 }

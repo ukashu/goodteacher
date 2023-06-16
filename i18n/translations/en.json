@@ -54,5 +54,24 @@
     "Report bug": "Report bug",
     "Visible to invites": "Visible to invites",
     "Log out": "Log out"
+  },
+  "zodErrors": {
+    "Name is required": "Name is required",
+    "Name must be at least 1 character long": "Name must be at least 1 character long",
+    "Name must be less than 20 characters long": "Name must be less than 20 characters long",
+    "Name must be less than 25 characters long": "Name must be less than 25 characters long",
+    "Not a valid email": "Not a valid email",
+    "Alias must be at least 1 character long": "Alias must be at least 1 character long",
+    "Alias must be less than 25 characters long": "Alias must be less than 25 characters long",
+    "Title must be at least 1 character long": "Title must be at least 1 character long",
+    "Title must be less than 25 characters long": "Title must be less than 25 characters long",
+    "Description must be at least 1 character long": "Description must be at least 1 character long",
+    "Description must be less than 140 characters long": "Description must be less than 140 characters long",
+    "Email is required": "Email is required",
+    "Password is required": "Password is required",
+    "Password must be at least 6 characters long": "Password must be at least 6 characters long",
+    "Password must be less than 100 characters long": "Password must be less than 100 characters long",
+    "Password confirmation is required": "Password confirmation is required",
+    "Passwords do not match": "Passwords do not match"
   }
 }
