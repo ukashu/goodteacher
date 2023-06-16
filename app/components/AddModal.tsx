@@ -82,7 +82,7 @@ export default function AddModal(props: AddModalProps) {
               {props.shortInputs.map((item) => { return (<CustomInput onChangeText={(input: string) => handleInputChange(input, item)} placeholder={t(`addModal.${item}` as any) as any} key={item} style={tw`mt-5`} autoCapitalize='none'/>)})}
             </View>
             <View style={tw` `}>
-              <CustomButton title={`${t("addModal.Add")} ${props.name}`} onPress={createResource} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-custom-blue-dark`}/>
+              <CustomButton title={`${t("addModal.Add")}`} onPress={createResource} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-custom-blue-dark`}/>
             </View>
           </View> 
         </View>
