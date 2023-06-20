@@ -5,7 +5,7 @@
 </div>
 
 >## Opis
-Aplikacja mobilna goodteacher ma zastąpić zeszyt ucznia. Mogą z niej korzystać nauczyciele i uczniowie, w pierwotnym zamyśle szkół muzycznych, ale znajdzie ona zastosowanie też w innych rodzajach szkół. Nauczyciel może stworzyć klasę, dodać do niej uczniów i wysyłać im zadania do wykonania. Uczniowie mogą dołączać do klas (lub odrzucać zaproszenia) i zarządzać swoimi zadaniami. Aplikacja jest napisana korzystając z React Native i korzysta z backendu Node.js/Express.js
+Aplikacja mobilna goodteacher to aplikacja która zastępuje zeszyt ucznia. Mogą z niej korzystać nauczyciele i uczniowie, w pierwotnym zamyśle szkół muzycznych, ale znajdzie ona zastosowanie też w innych rodzajach szkół. Nauczyciel może stworzyć klasę, dodać do niej uczniów i wysyłać im zadania do wykonania. Uczniowie mogą dołączać do klas (lub odrzucać zaproszenia) i zarządzać swoimi zadaniami. Aplikacja jest napisana korzystając z React Native i korzysta z backendu Node.js/Express.js.
 >## Pogląd
 <p>
 <details>
