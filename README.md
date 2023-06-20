@@ -1,64 +1,69 @@
-TODOS:
-  - add frontend error handling
-  - add frontend input validation to offload the server DONE
-  - loading functionality DONE
-  - fonts
-  - fetch classes functionality DONE
-  - Store user id in secure storage + global auth context for future requests DONE
-  - Store account type in secure storage + global auth context DONE
-  - I should figure out what to do on error in axios request, what to render - right now isLoading gets changed to false so it loads the classes page (and retries the request apparently)
-  - design loading screen DONEish
-  - Classes scrolling DONE
-  - refresh on pull down DONE
-  - student join class functionality DONE
-  - student leave class functionality DONE
-  - check how JSON parses number strings
-  - move joinclass, leaveclass to class nodes DONE
-  - fake class deletion, or joining in UI (set to invisible on leaveClass, figure out a way to set back to visible on refresh - currently it works on reopening the app) DONE
-  - add new class functionality DONE
-  - default avatar
-  - change password fields to invisible
-  - caching in react native + offline acces DONE
-  - random avatar generation + storage (generate random injection variables to preset svgs and save only the generated values)
-  - add proper error displaying
-  - maybe move common (background etc.) to separate page template component
-  - all icons same thickness (at least most of them)
-  - prevent student from deleting tasks in frontend
-  - in build there is a bar on top DONE
-  - make square app logo DONE
-  - language settings DONEish
-  - add custom colors to tailwind and use them in app DONE
-  - make logo/icon + splash screen DONE
-  - if token expires, remove token from storage, handle this globally in app DONEish (only in classes screen)
-  - axios makes requests two times in railway (may be some preflight or handshake or whatever)
-  - fix error handling,especially in Register nd Login
-  - class onPress sometimes doesnt work, happened after adding dyamic background (its probably because the svgt element overflows its container) DONE
-  - think of edge cases in student avatar generation
-  - avatars end up on right side most on the time DONE
-  - remove class avatar
-  - add student avatar to task screen maybe
-  - caching for offline data access maybe
-  - add graphics for student side classes
-  - check out react query for offline access or implement your own persistent offline caching POC DONE
-  - appwide offline cache DONE
-  - delete cache on logout DONE
-  - add class background for student
-  - maybe move top navigation and burger menu out from page components DONE
-  - remove cancel pressed console.log
-  - side drawer add dynamic name DONE
-  - add modal width less 
-  - addmodal gradient background DONE
-  - add translation to errors
-  - fetch class name in studentClass component
-  - refresh tasks doesnt render task done change
-  - change i18n resource names
-  - description input field should change size + it is not centered when typing
-  - maybe change students screen to different layout? maybe tiles
-  - button DELETE COMPLETED TASKS for teacher
-  - change element size to smaller (font size in testing phone is set to small, so on regular phones elements will be larger)
-  - change class avatar generation to generate from name
-  - white letters in addModal
-  - render invites at the bottom
-  - description firld resize
-  - tasks get reordered sometimes DONE
-  - render saved data when loading
+<div align="center">
+  <img src="./readme/banner.svg" width="60%" height="auto"/>
+  <p>:warning: This is a repository for the frontend side of this project - you can find server side in <a>goodteacher-api</a> repository.</p>
+</div>
+
+>## Description
+Goodteacher is an online replacement of a student notebook. It's made for teachers and students, primarily with music schools in mind, but it can be used in any field. Teachers can create classes, add students to them and send out tasks for students. The students can join classes and manage their task - complete or add more of them. It is a mobile application written in React Native with a Node.js server and a database. It features dynamically generated SVG avatars.
+>## Preview
+<p>
+<details>
+	<summary>View screenshots</summary>
+
+<p align="center">
+  <img src="./readme/register.jpg" width="auto" height="600"/>
+  <img src="./readme/classes.jpg" width="auto" height="600"/>
+  <img src="./readme/drawer.jpg" width="auto" height="600"/>
+  <img src="./readme/students.jpg" width="auto" height="600"/>
+  <img src="./readme/tasks.jpg" width="auto" height="600"/>
+</p>
+
+</details>
+<p>
+
+>## Tech stack
+<ul>
+  <p>server:</p>
+    <ul>
+      <li>Node.js</li>
+      <li>Express.js</li>
+    </ul>
+  <p>client:</p>
+    <ul>
+      <li>React Native</li>
+      <li>Expo</li>
+    </ul>
+  <p>database:</p>
+    <ul>
+      <li>PostgreSQL</li>
+      <li>Redis</li>
+      <li>Prisma</li>
+    </ul>
+  <p>authorization:</p>
+    <ul>
+      <li>Json Web Token</li>
+    </ul>
+  <p>testing:</p>
+    <ul>
+      <li>Jest</li>
+    </ul>
+  <p>other:</p>
+    <ul>
+      <li>Tailwind</li>
+      <li>Axios</li>
+      <li>Zod</li>
+      <li>i18next</li>
+    </ul>
+</ul>
+
+>## Prerequisites
+>## Installation
+>## Upcoming features
+<ul>
+  <li>report a bug</li>
+  <li>push notifications</li>
+  <li>file upload</li>
+  <li>browser-based class register</li>
+  <li>project website</li>
+  <li>ap published to playstore</li>
+</ul>
