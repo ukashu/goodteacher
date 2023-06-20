@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./readme/banner.svg" width="60%" height="auto"/>
+  <img src="./readme/banner_round.svg" width="60%" height="auto"/>
   <p>:warning: This is a repository for the frontend side of this project - you can find server side in the <a href="https://github.com/ukashu/goodteacher-api">goodteacher-api</a> repository.</p>
 </div>
 
@@ -42,7 +42,8 @@ Mobile app goodteacher is an online replacement of a student notebook. It's made
 <ul>
   <li><a href="https://nodejs.org/">Node.js</a></li>
   <li><a href="https://www.npmjs.com/">npm</a></li>
-  <li><a href="">goodteacher server</a></li>
+  <li><a href="https://expo.dev/">Expo</a></li>
+  <li><a href="https://github.com/ukashu/goodteacher-api">goodteacher server</a></li>
 </ul>
 
 >## Installation
