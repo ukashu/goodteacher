@@ -1,5 +1,4 @@
 import { View, Text, TouchableOpacity, TouchableOpacityProps, Alert } from 'react-native';
-import ClassAvatar from './ClassAvatar';
 import React from 'react';
 import tw from '../../lib/tailwind';
 import axios from 'axios';

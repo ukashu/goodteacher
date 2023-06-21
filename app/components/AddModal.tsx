@@ -114,7 +114,7 @@ export default function AddModal(props: AddModalProps) {
               <ClassAvatar/>
             </View>
             <View style={tw` mx-5 mb-5`}>
-              {props.shortInputs.map((item) => { return (<CustomInput onChangeText={(input: string) => handleInputChange(input, item)} placeholder={t(`addModal.${item}` as any) as any} key={item} style={tw`mt-5`} autoCapitalize='none'/>)})}
+              {props.shortInputs.map((item) => { return (<CustomInput onChangeText={(input: string) => handleInputChange(input, item)} multiline={item==="description"?true:false} placeholder={t(`addModal.${item}` as any) as any} key={item} style={tw`mt-5`} autoCapitalize='none'/>)})}
             </View>
             <View style={tw` `}>
               <CustomButton title={`${t("addModal.Add")}`} onPress={createResource} style={tw`px-4 py-2 self-center rounded-lg min-w-23 bg-custom-blue-dark`}/>

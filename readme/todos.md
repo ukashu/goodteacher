@@ -59,6 +59,6 @@ TODOS:
   - change class avatar generation to generate from name
   - white letters in addModal
   - render invites at the bottom
-  - description firld resize
+  - description field resize DONE
   - tasks get reordered sometimes DONE
-  - render saved data when loading
+  - finish translation
