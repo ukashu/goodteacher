@@ -1,11 +1,11 @@
 [![eng](https://img.shields.io/badge/lang-eng-blue.svg)](https://github.com/ukashu/goodteacher/blob/main/README.md)
 <div align="center">
   <img src="./banner_round.svg" width="60%" height="auto"/>
-  <p>:warning: To jest frontend-owa część kodu aplikacji. Kod serwera znajduje się w repozytorium <a href="https://github.com/ukashu/goodteacher-api">goodteacher-api</a>.</p>
+  <p>:warning: To jest frontendowa część kodu aplikacji. Kod serwera znajduje się w repozytorium <a href="https://github.com/ukashu/goodteacher-api">goodteacher-api</a>.</p>
 </div>
 
 >## Opis
-Aplikacja mobilna goodteacher to aplikacja która zastępuje zeszyt ucznia. Mogą z niej korzystać nauczyciele i uczniowie, w pierwotnym zamyśle szkół muzycznych, ale znajdzie ona zastosowanie też w innych rodzajach szkół. Nauczyciel może stworzyć klasę, dodać do niej uczniów i wysyłać im zadania do wykonania. Uczniowie mogą dołączać do klas (lub odrzucać zaproszenia) i zarządzać swoimi zadaniami. Aplikacja jest napisana korzystając z React Native i korzysta z backendu Node.js/Express.js.
+Aplikacja mobilna goodteacher to aplikacja która zastępuje zeszyt ucznia. Mogą z niej korzystać nauczyciele i uczniowie, w pierwotnym zamyśle szkół muzycznych, ale znajdzie ona zastosowanie też w innych rodzajach szkół. Nauczyciel może stworzyć klasę, dodać do niej uczniów i wysyłać im zadania do wykonania. Uczniowie mogą dołączać do klas (lub odrzucać zaproszenia) i zarządzać swoimi zadaniami. Aplikacja korzysta z React Native i backendu Node.js/Express.js.
 >## Pogląd
 <p>
 <details>
