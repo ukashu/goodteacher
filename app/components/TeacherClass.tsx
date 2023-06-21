@@ -78,10 +78,6 @@ export default function StudentClass(props : TeacherClassProps) {
         <TouchableOpacity onPress={props.goToStudents} onLongPress={() => {createTwoButtonDeleteAlert(props.classId)}} style={tw` w-100% h-100% rounded-lg  flex-row p-3 justify-between`}>
           <View style={tw``}>
             <Text style={tw`text-xl text-white`}>{props.className}</Text>
-            <Text style={tw` text-base text-white`}>{`class id: ${props.classId}`}</Text>
-          </View>
-          <View style={tw`bg-white rounded-md h-100% aspect-square`}>
-            <ClassAvatar/>
           </View>
         </TouchableOpacity>
       </View>

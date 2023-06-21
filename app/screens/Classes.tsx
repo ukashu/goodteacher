@@ -1,24 +1,24 @@
-import { View, Text, Button, ScrollView, RefreshControl, Alert, TouchableOpacity, Animated } from 'react-native';
+import { View, Text, ScrollView, RefreshControl, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import tw from '../../lib/tailwind';
 import { useAuth } from '../context/AuthContext';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
 import Background from '../../assets/background.svg';
 import CustomButton from '../components/CustomButton';
 import StudentClass from '../components/StudentClass';
 import TeacherClass from '../components/TeacherClass';
+import DrawerModal from '../components/DrawerModal';
+import AddModal from '../components/AddModal';
+import Loading from './Loading';
 import { API_URL } from '../context/AuthContext';
 import axios from 'axios'
-import Loading from './Loading';
 import { BlurView } from 'expo-blur';
-import AddModal from '../components/AddModal';
-import { catchTokenExpiredError } from '../utils/utils';
-import DrawerModal from '../components/DrawerModal';
 import { Entypo } from '@expo/vector-icons';
+import { catchTokenExpiredError } from '../utils/utils';
 import { useTranslation } from "react-i18next";
 
 type ClassesNavigationProp = NativeStackNavigationProp<
@@ -43,6 +43,13 @@ export default function Classes({ navigation }: Props) {
   const { authState, onLogout } = useAuth()
   const { t } = useTranslation();
 
+  //addModal
+  const [showModal, setShowModal] = React.useState<boolean>(false)
+
+  //drawerModal
+  const [showDrawerModal, setShowDrawerModal] = React.useState<boolean>(false)
+
+  //classes
   const [classes, setClasses] = React.useState<ClassesState>({
     classes: [],
     isError: false,
@@ -51,17 +58,6 @@ export default function Classes({ navigation }: Props) {
     isRefreshing: false,
     message: null,
   })
-
-  const [showModal, setShowModal] = React.useState<boolean>(false)
-  const [showDrawerModal, setShowDrawerModal] = React.useState<boolean>(false)
-
-  React.useEffect(() => {
-    if (showModal) {
-      fadeIn()
-    } else {
-      fadeOut()
-    }
-  }, [showModal])
 
   //useEffect getclasses once
   React.useEffect(() => {
@@ -155,27 +151,6 @@ export default function Classes({ navigation }: Props) {
     getClasses()
   }, []);
 
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
-  const fadeAnim = React.useRef(new Animated.Value(0)).current;
-
-  const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 300 ms
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const fadeOut = () => {
-    // Will change fadeAnim value to 0 in 100 ms
-    Animated.timing(fadeAnim, {
-      toValue: 0,
-      duration: 100,
-      useNativeDriver: true,
-    }).start();
-  };
-
   return (
     <>
     {classes.isLoading ? <Loading /> : (
@@ -210,17 +185,9 @@ export default function Classes({ navigation }: Props) {
             {showModal
             ? 
               <BlurView intensity={80} style={tw`absolute w-100% h-110% z-0 m-0`}>
-                <Animated.View
-                style={
-                  {
-                    // Bind opacity to animated value
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    opacity: fadeAnim,
-                  }}>
+                
                 <AddModal resource="class" name={t('classes.resource')} title={t("classes.Add new class")} shortInputs={["name"]} requestRoute="/classes" forceRerender={getClasses} setShowModal={() => setShowModal(prevState => !prevState)}/>
-                </Animated.View>
+                
               </BlurView>
             : <></>}
             {showDrawerModal

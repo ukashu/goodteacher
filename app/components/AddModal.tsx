@@ -1,7 +1,7 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import React from 'react';
 import tw from '../../lib/tailwind';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons'; 
 import CustomInput from './CustomInput';
 import CustomButton from './CustomButton';
 import ClassAvatar from './ClassAvatar';
@@ -64,7 +64,42 @@ export default function AddModal(props: AddModalProps) {
     }
   }
 
+  //animation
+  React.useEffect(() => {
+    fadeIn()
+  }, [])
+
+  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+
+  const fadeIn = () => {
+    // Will change fadeAnim value to 1 in 300 ms
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const fadeOut = () => {
+    // Will change fadeAnim value to 0 in 100 ms
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 100,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
+    <Animated.View
+      style={
+        {
+          // Bind opacity to animated value
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          opacity: fadeAnim,
+        }}>
       <View style={tw`items-center p-10 justify-around my-auto`}>
         <View style={tw`h-auto w-100% justify-between bg-custom-red-light rounded-lg shadow-md`}>
           <AddModalBackgroundSvg width="100%" height="100%" preserveAspectRatio='none' style={tw`absolute z-0`}/>
@@ -72,7 +107,7 @@ export default function AddModal(props: AddModalProps) {
             <Text style={tw` absolute self-center text-white text-3xl text-center mt-3`}>{props.title}</Text>
             <View style={tw` flex-row justify-between mb-1`}>
               <TouchableOpacity onPress={props.setShowModal}>
-                <Ionicons name="arrow-back" size={40} color="#3083ff"/>
+                <Entypo name="chevron-left" size={40} color="#3083ff"/>
               </TouchableOpacity>  
             </View>
             <View style={tw`bg-white rounded-md w-25% self-end aspect-square`}>
@@ -87,5 +122,6 @@ export default function AddModal(props: AddModalProps) {
           </View> 
         </View>
       </View>
+    </Animated.View>
     )
 }
